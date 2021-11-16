@@ -1,40 +1,42 @@
-# nouns-monorepo
+# awin-monorepo
 
-Nouns DAO is a generative avatar art collective run by a group of crypto misfits.
+AWIN DAO is an experiment.  All Works In NFTs - an experiment to create a new Copyright system, DeCompose for Community Contributors as well as Creators.  Generative avatar/meme art element/components are contemplated to be a Community Member contribution adding to a Creators base media "offering".
+
+A DAO and NFT "set" of core services are contemplated for this sevice / along with the respective UIs (Web, mobile voice, etc.)
 
 ## Contributing
 
-If you're interested in contributing to Nouns DAO repos we're excited to have you. Please discuss any changes in `#developers` in [discord.gg/nouns](https://discord.gg/nouns) prior to contributing to reduce duplication of effort and in case there is any prior art that may be useful to you.
+If you're interested in contributing to AWIN DAO repos we're excited to have you. Please discuss any changes in `#developers` in [discord.gg/nouns](https://discord.gg/awin) prior to contributing to reduce duplication of effort and in case there is any prior art that may be useful to you.
 
 ## Packages
 
-### nouns-api
+### awin-api
 
-The [nouns api](packages/nouns-api) is an HTTP webserver that hosts token metadata. This is currently unused because on-chain, data URIs are enabled.
+The [awin api](packages/awin-api) is an HTTP webserver that hosts token metadata. This is currently unused because on-chain, data URIs are enabled.  However - as an experiment - we are looking at creative possibilites for Community Contributors along with Original Creator of "All Works".
 
-### nouns-assets
+### awin-assets
 
-The [nouns assets](packages/nouns-assets) package holds the Noun PNG and run-length encoded image data.
+The [awin assets](packages/awin-assets) package holds the Noun PNG and run-length encoded image data.
 
-### nouns-bots
+### awin-bots
 
-The [nouns bots](packages/nouns-bots) package contains a bot that monitors for changes in Noun auction state and notifies everyone via Twitter and Discord.
+The [awin bots](packages/awin-bots) package contains a bot that monitors for changes in AWIN auction state and notifies everyone via Twitter and Discord.
 
-### nouns-contracts
+### awin-contracts
 
-The [nouns contracts](packages/nouns-contracts) is the suite of Solidity contracts powering Nouns DAO.
+The [awin contracts](packages/awin-contracts) is the suite of Solidity contracts powering AWIN DAO.
 
-### nouns-sdk
+### awin-sdk
 
 The [nouns sdk](packages/nouns-sdk) exposes the Nouns contract addresses, ABIs, and instances as well as image encoding and SVG building utilities.
 
-### nouns-subgraph
+### awin-subgraph
 
-In order to make retrieving more complex data from the auction history, [nouns subgraph](packages/nouns-subgraph) contains subgraph manifests that are deployed onto [The Graph](https://thegraph.com).
+In order to make retrieving more complex data from the auction history, [awins subgraph](packages/awins-subgraph) contains subgraph manifests that are deployed onto [The Graph](https://thegraph.com).
 
-### nouns-webapp
+### awin-webapp
 
-The [nouns webapp](packages/nouns-webapp) is the frontend for interacting with Noun auctions as hosted at [nouns.wtf](https://nouns.wtf).
+The [awin webapp](packages/awin-webapp) is the frontend for interacting with AWIN auctions as hosted at [awin.xxx](https://awin.xxx).
 
 ## Quickstart
 
