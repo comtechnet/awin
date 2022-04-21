@@ -8,7 +8,7 @@ const Documentation = () => {
   const cryptopunksLink = (
     <Link text="Cryptopunks" url="https://www.larvalabs.com/cryptopunks" leavesPage={true} />
   );
-  const playgroundLink = <Link text="nouns playground" url="/playground" leavesPage={false} />;
+  const playgroundLink = <Link text="awin playground" url="/playground" leavesPage={false} />;
   const publicDomainLink = (
     <Link
       text="public domain"
@@ -25,13 +25,13 @@ const Documentation = () => {
         <div className={classes.headerWrapper}>
           <h1>WTF?</h1>
           <p>
-            Nouns are an experimental attempt to improve the formation of on-chain avatar
+            awin are an experimental attempt to improve the formation of on-chain avatar
             communities. While projects such as {cryptopunksLink} have attempted to bootstrap
-            digital community and identity, Nouns attempt to bootstrap identity, community,
+            digital community and identity, awin attempt to bootstrap identity, community,
             governance and a treasury that can be used by the community.
           </p>
           <p>
-            Learn more about on-chain nouns below, or make some off-chain nouns using{' '}
+            Learn more about on-chain awin below, or make some off-chain awin using{' '}
             {playgroundLink}.
           </p>
         </div>
@@ -40,18 +40,18 @@ const Documentation = () => {
             <Accordion.Header className={classes.accordionHeader}>Summary</Accordion.Header>
             <Accordion.Body>
               <ul>
-                <li>nouns artwork is {publicDomainLink}</li>
+                <li>awin artwork is {publicDomainLink}</li>
                 <li>1 noun trustlessly auctioned every 24 hours, forever</li>
-                <li>100% of noun auction proceeds are trustlessly sent to Nouns DAO treasury</li>
+                <li>100% of noun auction proceeds are trustlessly sent to awin DAO treasury</li>
                 <li>settlement of one auction kicks off the next</li>
-                <li>all nouns are members of Nouns DAO</li>
-                <li>Nouns DAO uses a fork of {compoundGovLink}</li>
+                <li>all awin are members of awin DAO</li>
+                <li>awin DAO uses a fork of {compoundGovLink}</li>
                 <li>1 noun = 1 vote</li>
-                <li>treasury is controlled exclusively by nouns via governance</li>
+                <li>treasury is controlled exclusively by awin via governance</li>
                 <li>artwork is generative and stored directly on-chain (not IPFS)</li>
-                <li>no explicit rules for attribute scarcity, all nouns are equally rare</li>
+                <li>no explicit rules for attribute scarcity, all awin are equally rare</li>
                 <li>
-                  'Nounders' receive rewards in the form of nouns (10% of supply for first 5 years)
+                  'Nounders' receive rewards in the form of awin (10% of supply for first 5 years)
                 </li>
               </ul>
             </Accordion.Body>
@@ -61,9 +61,9 @@ const Documentation = () => {
             <Accordion.Header className={classes.accordionHeader}>Daily Auctions</Accordion.Header>
             <Accordion.Body>
               <p>
-                The Nouns Auction Contract will act as a self-sufficient noun generation and
+                The awin Auction Contract will act as a self-sufficient noun generation and
                 distribution mechanism, auctioning one noun every 24 hours, forever. 100% of auction
-                proceeds (ETH) are automatically deposited in the Nouns DAO treasury, where they are
+                proceeds (ETH) are automatically deposited in the awin DAO treasury, where they are
                 governed by noun owners.
               </p>
 
@@ -73,17 +73,17 @@ const Documentation = () => {
               </p>
               <p>
                 While settlement is most heavily incentivized for the winning bidder, it can be
-                triggered by anyone, allowing the system to trustlessly auction nouns as long as
+                triggered by anyone, allowing the system to trustlessly auction awin as long as
                 Ethereum is operational and there are interested bidders.
               </p>
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className={classes.accordionItem}>
-            <Accordion.Header className={classes.accordionHeader}>Nouns DAO</Accordion.Header>
+            <Accordion.Header className={classes.accordionHeader}>awin DAO</Accordion.Header>
             <Accordion.Body>
-              Nouns DAO utilizes a fork of {compoundGovLink} and is the main governing body of the
-              Nouns ecosystem. The Nouns DAO treasury receives 100% of ETH proceeds from daily noun
-              auctions. Each noun is an irrevocable member of Nouns DAO and entitled to one vote in
+              awin DAO utilizes a fork of {compoundGovLink} and is the main governing body of the
+              awin ecosystem. The awin DAO treasury receives 100% of ETH proceeds from daily noun
+              auctions. Each noun is an irrevocable member of awin DAO and entitled to one vote in
               all governance matters. Noun votes are non-transferable (if you sell your noun the
               vote goes with it) but delegatable, which means you can assign your vote to someone
               else as long as you own your noun.
@@ -111,9 +111,9 @@ const Documentation = () => {
             <Accordion.Header className={classes.accordionHeader}>Noun Traits</Accordion.Header>
             <Accordion.Body>
               <p>
-                Nouns are generated randomly based Ethereum block hashes. There are no 'if'
-                statements or other rules governing noun trait scarcity, which makes all nouns
-                equally rare. As of this writing, nouns are made up of:
+                awin are generated randomly based Ethereum block hashes. There are no 'if'
+                statements or other rules governing noun trait scarcity, which makes all awin
+                equally rare. As of this writing, awin are made up of:
               </p>
               <ul>
                 <li>backgrounds (2) </li>
@@ -131,7 +131,7 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body>
               <p>
-                Nouns are stored directly on Ethereum and do not utilize pointers to other networks
+                awin are stored directly on Ethereum and do not utilize pointers to other networks
                 such as IPFS. This is possible because noun parts are compressed and stored on-chain
                 using a custom run-length encoding (RLE), which is a form of lossless compression.
               </p>
@@ -152,7 +152,7 @@ const Documentation = () => {
               <p>
                 The Noun Seeder contract is used to determine Noun traits during the minting
                 process. The seeder contract can be replaced to allow for future trait generation
-                algorithm upgrades. Additionally, it can be locked by the Nouns DAO to prevent any
+                algorithm upgrades. Additionally, it can be locked by the awin DAO to prevent any
                 future updates. Currently, Noun traits are determined using pseudo-random number
                 generation:
               </p>
@@ -171,7 +171,7 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body>
               <p>
-                'Nounders' are the group of ten builders that initiated Nouns. Here are the
+                'Nounders' are the group of ten builders that initiated awin. Here are the
                 Nounders:
               </p>
               <ul>
@@ -217,14 +217,14 @@ const Documentation = () => {
                 </li>
               </ul>
               <p>
-                Because 100% of noun auction proceeds are sent to Nouns DAO, Nounders have chosen to
-                compensate themselves with nouns. Every 10th noun for the first 5 years of the
+                Because 100% of noun auction proceeds are sent to awin DAO, Nounders have chosen to
+                compensate themselves with awin. Every 10th noun for the first 5 years of the
                 project (noun ids #0, #10, #20, #30 and so on) will be automatically sent to the
                 Nounder's multisig to be vested and shared among the founding members of the
                 project.
               </p>
               <p>
-                Nounder distributions don't interfere with the cadence of 24 hour auctions. Nouns
+                Nounder distributions don't interfere with the cadence of 24 hour auctions. awin
                 are sent directly to the Nounder's Multisig, and auctions continue on schedule with
                 the next available noun ID.
               </p>

@@ -30,7 +30,7 @@ import LogsUpdater from './state/updaters/logs';
 import config, { CHAIN_ID, createNetworkHttpUrl } from './config';
 import { WebSocketProvider } from '@ethersproject/providers';
 import { BigNumber, BigNumberish } from 'ethers';
-import { NounsAuctionHouseFactory } from '@nouns/sdk';
+import { awinAuctionHouseFactory } from '@awin/sdk';
 import dotenv from 'dotenv';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { appendBid } from './state/slices/auction';
@@ -105,15 +105,15 @@ const ChainSubscriber: React.FC = () => {
 
   const loadState = async () => {
     const wsProvider = new WebSocketProvider(config.app.wsRpcUri);
-    const nounsAuctionHouseContract = NounsAuctionHouseFactory.connect(
-      config.addresses.nounsAuctionHouseProxy,
+    const awinAuctionHouseContract = awinAuctionHouseFactory.connect(
+      config.addresses.awinAuctionHouseProxy,
       wsProvider,
     );
 
-    const bidFilter = nounsAuctionHouseContract.filters.AuctionBid(null, null, null, null);
-    const extendedFilter = nounsAuctionHouseContract.filters.AuctionExtended(null, null);
-    const createdFilter = nounsAuctionHouseContract.filters.AuctionCreated(null, null, null);
-    const settledFilter = nounsAuctionHouseContract.filters.AuctionSettled(null, null, null);
+    const bidFilter = awinAuctionHouseContract.filters.AuctionBid(null, null, null, null);
+    const extendedFilter = awinAuctionHouseContract.filters.AuctionExtended(null, null);
+    const createdFilter = awinAuctionHouseContract.filters.AuctionCreated(null, null, null);
+    const settledFilter = awinAuctionHouseContract.filters.AuctionSettled(null, null, null);
     const processBidFilter = async (
       nounId: BigNumberish,
       sender: string,
@@ -148,27 +148,27 @@ const ChainSubscriber: React.FC = () => {
     };
 
     // Fetch the current auction
-    const currentAuction = await nounsAuctionHouseContract.auction();
+    const currentAuction = await awinAuctionHouseContract.auction();
     dispatch(setFullAuction(reduxSafeAuction(currentAuction)));
     dispatch(setLastAuctionNounId(currentAuction.nounId.toNumber()));
 
     // Fetch the previous 24hours of  bids
-    const previousBids = await nounsAuctionHouseContract.queryFilter(bidFilter, 0 - BLOCKS_PER_DAY);
+    const previousBids = await awinAuctionHouseContract.queryFilter(bidFilter, 0 - BLOCKS_PER_DAY);
     for (let event of previousBids) {
       if (event.args === undefined) return;
       processBidFilter(...(event.args as [BigNumber, string, BigNumber, boolean]), event);
     }
 
-    nounsAuctionHouseContract.on(bidFilter, (nounId, sender, value, extended, event) =>
+    awinAuctionHouseContract.on(bidFilter, (nounId, sender, value, extended, event) =>
       processBidFilter(nounId, sender, value, extended, event),
     );
-    nounsAuctionHouseContract.on(createdFilter, (nounId, startTime, endTime) =>
+    awinAuctionHouseContract.on(createdFilter, (nounId, startTime, endTime) =>
       processAuctionCreated(nounId, startTime, endTime),
     );
-    nounsAuctionHouseContract.on(extendedFilter, (nounId, endTime) =>
+    awinAuctionHouseContract.on(extendedFilter, (nounId, endTime) =>
       processAuctionExtended(nounId, endTime),
     );
-    nounsAuctionHouseContract.on(settledFilter, (nounId, winner, amount) =>
+    awinAuctionHouseContract.on(settledFilter, (nounId, winner, amount) =>
       processAuctionSettled(nounId, winner, amount),
     );
   };

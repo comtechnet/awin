@@ -1,9 +1,9 @@
 {
-  "name": "@nouns/contracts",
+  "name": "@awin/contracts",
   "version": "0.1.2",
-  "description": "Nouns solidity contracts & artifacts",
+  "description": "awin solidity contracts & artifacts",
   "author": "Nounders",
-  "homepage": "https://nouns.wtf",
+  "homepage": "https://awin.wtf",
   "license": "GPL-3.0",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

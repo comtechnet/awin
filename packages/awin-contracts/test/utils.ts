@@ -1,12 +1,12 @@
 import { ethers, network } from 'hardhat';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import {
-  NounsDescriptor,
-  NounsDescriptorFactory,
-  NounsToken,
-  NounsTokenFactory,
-  NounsSeeder,
-  NounsSeederFactory,
+  awinDescriptor,
+  awinDescriptorFactory,
+  awinToken,
+  awinTokenFactory,
+  awinSeeder,
+  awinSeederFactory,
   Weth,
   WethFactory,
 } from '../typechain';
@@ -31,44 +31,44 @@ export const getSigners = async (): Promise<TestSigners> => {
   };
 };
 
-export const deployNounsDescriptor = async (
+export const deployawinDescriptor = async (
   deployer?: SignerWithAddress,
-): Promise<NounsDescriptor> => {
+): Promise<awinDescriptor> => {
   const signer = deployer || (await getSigners()).deployer;
   const nftDescriptorLibraryFactory = await ethers.getContractFactory('NFTDescriptor', signer);
   const nftDescriptorLibrary = await nftDescriptorLibraryFactory.deploy();
-  const nounsDescriptorFactory = new NounsDescriptorFactory(
+  const awinDescriptorFactory = new awinDescriptorFactory(
     {
       __$e1d8844a0810dc0e87a665b1f2b5fa7c69$__: nftDescriptorLibrary.address,
     },
     signer,
   );
 
-  return nounsDescriptorFactory.deploy();
+  return awinDescriptorFactory.deploy();
 };
 
-export const deployNounsSeeder = async (deployer?: SignerWithAddress): Promise<NounsSeeder> => {
-  const factory = new NounsSeederFactory(deployer || (await getSigners()).deployer);
+export const deployawinSeeder = async (deployer?: SignerWithAddress): Promise<awinSeeder> => {
+  const factory = new awinSeederFactory(deployer || (await getSigners()).deployer);
 
   return factory.deploy();
 };
 
-export const deployNounsToken = async (
+export const deployawinToken = async (
   deployer?: SignerWithAddress,
   noundersDAO?: string,
   minter?: string,
   descriptor?: string,
   seeder?: string,
   proxyRegistryAddress?: string,
-): Promise<NounsToken> => {
+): Promise<awinToken> => {
   const signer = deployer || (await getSigners()).deployer;
-  const factory = new NounsTokenFactory(signer);
+  const factory = new awinTokenFactory(signer);
 
   return factory.deploy(
     noundersDAO || signer.address,
     minter || signer.address,
-    descriptor || (await deployNounsDescriptor(signer)).address,
-    seeder || (await deployNounsSeeder(signer)).address,
+    descriptor || (await deployawinDescriptor(signer)).address,
+    seeder || (await deployawinSeeder(signer)).address,
     proxyRegistryAddress || address(0),
   );
 };
@@ -79,30 +79,30 @@ export const deployWeth = async (deployer?: SignerWithAddress): Promise<Weth> =>
   return factory.deploy();
 };
 
-export const populateDescriptor = async (nounsDescriptor: NounsDescriptor): Promise<void> => {
+export const populateDescriptor = async (awinDescriptor: awinDescriptor): Promise<void> => {
   const { bgcolors, palette, images } = ImageData;
   const { bodies, accessories, heads, glasses } = images;
 
   // Split up head and accessory population due to high gas usage
   await Promise.all([
-    nounsDescriptor.addManyBackgrounds(bgcolors),
-    nounsDescriptor.addManyColorsToPalette(0, palette),
-    nounsDescriptor.addManyBodies(bodies.map(({ data }) => data)),
+    awinDescriptor.addManyBackgrounds(bgcolors),
+    awinDescriptor.addManyColorsToPalette(0, palette),
+    awinDescriptor.addManyBodies(bodies.map(({ data }) => data)),
     chunkArray(accessories, 10).map(chunk =>
-      nounsDescriptor.addManyAccessories(chunk.map(({ data }) => data)),
+      awinDescriptor.addManyAccessories(chunk.map(({ data }) => data)),
     ),
-    chunkArray(heads, 10).map(chunk => nounsDescriptor.addManyHeads(chunk.map(({ data }) => data))),
-    nounsDescriptor.addManyGlasses(glasses.map(({ data }) => data)),
+    chunkArray(heads, 10).map(chunk => awinDescriptor.addManyHeads(chunk.map(({ data }) => data))),
+    awinDescriptor.addManyGlasses(glasses.map(({ data }) => data)),
   ]);
 };
 
 /**
- * Return a function used to mint `amount` Nouns on the provided `token`
- * @param token The Nouns ERC721 token
- * @param amount The number of Nouns to mint
+ * Return a function used to mint `amount` awin on the provided `token`
+ * @param token The awin ERC721 token
+ * @param amount The number of awin to mint
  */
-export const MintNouns = (
-  token: NounsToken,
+export const Mintawin = (
+  token: awinToken,
   burnNoundersTokens = true,
 ): ((amount: number) => Promise<void>) => {
   return async (amount: number): Promise<void> => {
@@ -118,7 +118,7 @@ export const MintNouns = (
 /**
  * Mints or burns tokens to target a total supply. Due to Nounders' rewards tokens may be burned and tokenIds will not be sequential
  */
-export const setTotalSupply = async (token: NounsToken, newTotalSupply: number): Promise<void> => {
+export const setTotalSupply = async (token: awinToken, newTotalSupply: number): Promise<void> => {
   const totalSupply = (await token.totalSupply()).toNumber();
 
   if (totalSupply < newTotalSupply) {

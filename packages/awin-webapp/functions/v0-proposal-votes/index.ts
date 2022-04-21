@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { NormalizedNoun, NormalizedVote, nounsQuery } from '../theGraph';
+import { NormalizedNoun, NormalizedVote, awinQuery } from '../theGraph';
 import { sharedResponseHeaders } from '../utils';
 
 interface ProposalVote {
@@ -20,8 +20,8 @@ const builtProposalVote = (noun: NormalizedNoun, vote: NormalizedVote): Proposal
   supportDetailed: vote.supportDetailed,
 });
 
-const reduceProposalVotes = (nouns: NormalizedNoun[]) =>
-  nouns.reduce((acc: ProposalVotes, noun: NormalizedNoun) => {
+const reduceProposalVotes = (awin: NormalizedNoun[]) =>
+  awin.reduce((acc: ProposalVotes, noun: NormalizedNoun) => {
     for (let i in noun.votes) {
       const vote = noun.votes[i];
       if (!acc[vote.proposalId]) acc[vote.proposalId] = [];
@@ -31,14 +31,14 @@ const reduceProposalVotes = (nouns: NormalizedNoun[]) =>
   }, {});
 
 const handler: Handler = async (event, context) => {
-  const nouns = await nounsQuery();
+  const awin = await awinQuery();
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
       ...sharedResponseHeaders,
     },
-    body: JSON.stringify(reduceProposalVotes(nouns)),
+    body: JSON.stringify(reduceProposalVotes(awin)),
   };
 };
 

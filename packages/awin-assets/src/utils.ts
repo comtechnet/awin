@@ -1,4 +1,4 @@
-import { NounSeed, NounData } from './types';
+import { awineed, NounData } from './types';
 import { images, bgcolors } from './image-data.json';
 
 const { bodies, accessories, heads, glasses } = images;
@@ -7,7 +7,7 @@ const { bodies, accessories, heads, glasses } = images;
  * Get encoded part and background information using a Noun seed
  * @param seed The Noun seed
  */
-export const getNounData = (seed: NounSeed): NounData => {
+export const getNounData = (seed: awineed): NounData => {
   return {
     parts: [
       bodies[seed.body],
@@ -23,7 +23,7 @@ export const getNounData = (seed: NounSeed): NounData => {
  * Generate a random Noun seed
  * @param seed The Noun seed
  */
-export const getRandomNounSeed = (): NounSeed => {
+export const getRandomawineed = (): awineed => {
   return {
     background: Math.floor(Math.random() * bgcolors.length),
     body: Math.floor(Math.random() * bodies.length),

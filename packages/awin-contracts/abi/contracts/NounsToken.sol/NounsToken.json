@@ -12,12 +12,12 @@
         "type": "address"
       },
       {
-        "internalType": "contract INounsDescriptor",
+        "internalType": "contract IawinDescriptor",
         "name": "_descriptor",
         "type": "address"
       },
       {
-        "internalType": "contract INounsSeeder",
+        "internalType": "contract IawinSeeder",
         "name": "_seeder",
         "type": "address"
       },
@@ -141,7 +141,7 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "contract INounsDescriptor",
+        "internalType": "contract IawinDescriptor",
         "name": "descriptor",
         "type": "address"
       }
@@ -219,7 +219,7 @@
           }
         ],
         "indexed": false,
-        "internalType": "struct INounsSeeder.Seed",
+        "internalType": "struct IawinSeeder.Seed",
         "name": "seed",
         "type": "tuple"
       }
@@ -270,7 +270,7 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "contract INounsSeeder",
+        "internalType": "contract IawinSeeder",
         "name": "seeder",
         "type": "address"
       }
@@ -528,7 +528,7 @@
     "name": "descriptor",
     "outputs": [
       {
-        "internalType": "contract INounsDescriptor",
+        "internalType": "contract IawinDescriptor",
         "name": "",
         "type": "address"
       }
@@ -880,7 +880,7 @@
     "name": "seeder",
     "outputs": [
       {
-        "internalType": "contract INounsSeeder",
+        "internalType": "contract IawinSeeder",
         "name": "",
         "type": "address"
       }
@@ -961,7 +961,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract INounsDescriptor",
+        "internalType": "contract IawinDescriptor",
         "name": "_descriptor",
         "type": "address"
       }
@@ -1000,7 +1000,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract INounsSeeder",
+        "internalType": "contract IawinSeeder",
         "name": "_seeder",
         "type": "address"
       }

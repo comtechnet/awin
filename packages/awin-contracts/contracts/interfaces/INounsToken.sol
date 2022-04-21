@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title Interface for NounsToken
+/// @title Interface for awinToken
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -18,11 +18,11 @@
 pragma solidity ^0.8.6;
 
 import { IERC721 } from '@openzeppelin/contracts/token/ERC721/IERC721.sol';
-import { INounsDescriptor } from './INounsDescriptor.sol';
-import { INounsSeeder } from './INounsSeeder.sol';
+import { IawinDescriptor } from './IawinDescriptor.sol';
+import { IawinSeeder } from './IawinSeeder.sol';
 
-interface INounsToken is IERC721 {
-    event NounCreated(uint256 indexed tokenId, INounsSeeder.Seed seed);
+interface IawinToken is IERC721 {
+    event NounCreated(uint256 indexed tokenId, IawinSeeder.Seed seed);
 
     event NounBurned(uint256 indexed tokenId);
 
@@ -32,11 +32,11 @@ interface INounsToken is IERC721 {
 
     event MinterLocked();
 
-    event DescriptorUpdated(INounsDescriptor descriptor);
+    event DescriptorUpdated(IawinDescriptor descriptor);
 
     event DescriptorLocked();
 
-    event SeederUpdated(INounsSeeder seeder);
+    event SeederUpdated(IawinSeeder seeder);
 
     event SeederLocked();
 
@@ -52,11 +52,11 @@ interface INounsToken is IERC721 {
 
     function lockMinter() external;
 
-    function setDescriptor(INounsDescriptor descriptor) external;
+    function setDescriptor(IawinDescriptor descriptor) external;
 
     function lockDescriptor() external;
 
-    function setSeeder(INounsSeeder seeder) external;
+    function setSeeder(IawinSeeder seeder) external;
 
     function lockSeeder() external;
 }

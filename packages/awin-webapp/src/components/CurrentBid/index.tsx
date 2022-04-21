@@ -9,7 +9,7 @@ import TruncatedAmount from '../TruncatedAmount';
 export const BID_N_A = 'n/a';
 
 /**
- * Special Bid type for not applicable auctions (Nounder Nouns)
+ * Special Bid type for not applicable auctions (Nounder awin)
  */
 type BidNa = typeof BID_N_A;
 

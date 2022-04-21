@@ -7,7 +7,7 @@ const { ethers } = hardhat;
 import { BigNumber as EthersBN } from 'ethers';
 
 import {
-  deployNounsToken,
+  deployawinToken,
   getSigners,
   TestSigners,
   setTotalSupply,
@@ -24,13 +24,13 @@ import {
 
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import {
-  NounsToken,
-  NounsDescriptorFactory,
-  NounsDaoProxyFactory,
-  NounsDaoLogicV1,
-  NounsDaoLogicV1Factory,
-  NounsDaoExecutor,
-  NounsDaoExecutorFactory,
+  awinToken,
+  awinDescriptorFactory,
+  awinDaoProxyFactory,
+  awinDaoLogicV1,
+  awinDaoLogicV1Factory,
+  awinDaoExecutor,
+  awinDaoExecutorFactory,
 } from '../../../typechain';
 
 chai.use(solidity);
@@ -59,13 +59,13 @@ async function reset(): Promise<void> {
     return;
   }
 
-  // nonce 0: Deploy NounsDAOExecutor
-  // nonce 1: Deploy NounsDAOLogicV1
+  // nonce 0: Deploy awinDAOExecutor
+  // nonce 1: Deploy awinDAOLogicV1
   // nonce 2: Deploy nftDescriptorLibraryFactory
-  // nonce 3: Deploy NounsDescriptor
-  // nonce 4: Deploy NounsSeeder
-  // nonce 5: Deploy NounsToken
-  // nonce 6: Deploy NounsDAOProxy
+  // nonce 3: Deploy awinDescriptor
+  // nonce 4: Deploy awinSeeder
+  // nonce 5: Deploy awinToken
+  // nonce 6: Deploy awinDAOProxy
   // nonce 7+: populate Descriptor
 
   vetoer = deployer;
@@ -75,18 +75,18 @@ async function reset(): Promise<void> {
     nonce: (await deployer.getTransactionCount()) + 6,
   });
 
-  // Deploy NounsDAOExecutor with pre-computed Delegator address
-  timelock = await new NounsDaoExecutorFactory(deployer).deploy(govDelegatorAddress, timelockDelay);
+  // Deploy awinDAOExecutor with pre-computed Delegator address
+  timelock = await new awinDaoExecutorFactory(deployer).deploy(govDelegatorAddress, timelockDelay);
   const timelockAddress = timelock.address;
 
   // Deploy Delegate
-  const { address: govDelegateAddress } = await new NounsDaoLogicV1Factory(deployer).deploy();
+  const { address: govDelegateAddress } = await new awinDaoLogicV1Factory(deployer).deploy();
 
-  // Deploy Nouns token
-  token = await deployNounsToken(deployer);
+  // Deploy awin token
+  token = await deployawinToken(deployer);
 
   // Deploy Delegator
-  await new NounsDaoProxyFactory(deployer).deploy(
+  await new awinDaoProxyFactory(deployer).deploy(
     timelockAddress,
     token.address,
     vetoer.address,
@@ -99,9 +99,9 @@ async function reset(): Promise<void> {
   );
 
   // Cast Delegator as Delegate
-  gov = NounsDaoLogicV1Factory.connect(govDelegatorAddress, deployer);
+  gov = awinDaoLogicV1Factory.connect(govDelegatorAddress, deployer);
 
-  await populateDescriptor(NounsDescriptorFactory.connect(await token.descriptor(), deployer));
+  await populateDescriptor(awinDescriptorFactory.connect(await token.descriptor(), deployer));
 
   snapshotId = await ethers.provider.send('evm_snapshot', []);
 }
@@ -125,7 +125,7 @@ async function propose(proposer: SignerWithAddress, mint = true) {
 
 let snapshotId: number;
 
-let token: NounsToken;
+let token: awinToken;
 let deployer: SignerWithAddress;
 let vetoer: SignerWithAddress;
 let account0: SignerWithAddress;
@@ -133,8 +133,8 @@ let account1: SignerWithAddress;
 let account2: SignerWithAddress;
 let signers: TestSigners;
 
-let gov: NounsDaoLogicV1;
-let timelock: NounsDaoExecutor;
+let gov: awinDaoLogicV1;
+let timelock: awinDaoExecutor;
 const timelockDelay = 172800; // 2 days
 
 const proposalThresholdBPS = 500; // 5%
@@ -146,7 +146,7 @@ let signatures: string[];
 let callDatas: string[];
 let proposalId: EthersBN;
 
-describe('NounsDAO#vetoing', () => {
+describe('awinDAO#vetoing', () => {
   before(async () => {
     signers = await getSigners();
     deployer = signers.deployer;
@@ -168,7 +168,7 @@ describe('NounsDAO#vetoing', () => {
 
   it('rejects setting a new vetoer when sender is not vetoer', async () => {
     await expect(gov.connect(account0)._setVetoer(account1.address)).revertedWith(
-      'NounsDAO::_setVetoer: vetoer only',
+      'awinDAO::_setVetoer: vetoer only',
     );
   });
 
@@ -181,18 +181,18 @@ describe('NounsDAO#vetoing', () => {
 
   it('only vetoer can veto', async () => {
     await propose(account0);
-    await expect(gov.veto(proposalId)).revertedWith('NounsDAO::veto: only vetoer');
+    await expect(gov.veto(proposalId)).revertedWith('awinDAO::veto: only vetoer');
   });
 
   it('burns veto power correctly', async () => {
     // vetoer is still set
     expect(await gov.vetoer()).to.equal(vetoer.address);
-    await expect(gov._burnVetoPower()).revertedWith('NounsDAO::_burnVetoPower: vetoer only');
+    await expect(gov._burnVetoPower()).revertedWith('awinDAO::_burnVetoPower: vetoer only');
     // burn
     await gov.connect(vetoer)._burnVetoPower();
     expect(await gov.vetoer()).to.equal(address(0));
     await expect(gov.connect(vetoer).veto(proposalId)).revertedWith(
-      'NounsDAO::veto: veto power burned',
+      'awinDAO::veto: veto power burned',
     );
   });
 
@@ -308,7 +308,7 @@ describe('NounsDAO#vetoing', () => {
       await gov.execute(proposalId);
       await expectState(proposalId, 'Executed');
       await expect(gov.veto(proposalId)).revertedWith(
-        'NounsDAO::veto: cannot veto executed proposal',
+        'awinDAO::veto: cannot veto executed proposal',
       );
     });
     it('Vetoed', async () => {

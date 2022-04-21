@@ -2,14 +2,14 @@
 
 pragma solidity ^0.8.6;
 
-import '../governance/NounsDAOExecutor.sol';
+import '../governance/awinDAOExecutor.sol';
 
 interface Administered {
     function _acceptAdmin() external returns (uint256);
 }
 
-contract NounsDAOExecutorHarness is NounsDAOExecutor {
-    constructor(address admin_, uint256 delay_) NounsDAOExecutor(admin_, delay_) {}
+contract awinDAOExecutorHarness is awinDAOExecutor {
+    constructor(address admin_, uint256 delay_) awinDAOExecutor(admin_, delay_) {}
 
     function harnessSetPendingAdmin(address pendingAdmin_) public {
         pendingAdmin = pendingAdmin_;
@@ -20,8 +20,8 @@ contract NounsDAOExecutorHarness is NounsDAOExecutor {
     }
 }
 
-contract NounsDAOExecutorTest is NounsDAOExecutor {
-    constructor(address admin_, uint256 delay_) NounsDAOExecutor(admin_, 2 days) {
+contract awinDAOExecutorTest is awinDAOExecutor {
+    constructor(address admin_, uint256 delay_) awinDAOExecutor(admin_, 2 days) {
         delay = delay_;
     }
 

@@ -1,4 +1,4 @@
-# @nouns/bots
+# @awin/bots
 
 A bot that monitors for changes in Noun auction state and notifies everyone via Twitter and Discord.
 

@@ -1,5 +1,5 @@
 import { Badge } from 'react-bootstrap';
-import { ProposalState } from '../../wrappers/nounsDao';
+import { ProposalState } from '../../wrappers/awinDao';
 
 const statusVariant = (status: ProposalState | undefined) => {
   switch (status) {

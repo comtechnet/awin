@@ -250,8 +250,8 @@
   {
     "inputs": [
       {
-        "internalType": "contract INounsToken",
-        "name": "_nouns",
+        "internalType": "contract IawinToken",
+        "name": "_awin",
         "type": "address"
       },
       {
@@ -300,10 +300,10 @@
   },
   {
     "inputs": [],
-    "name": "nouns",
+    "name": "awin",
     "outputs": [
       {
-        "internalType": "contract INounsToken",
+        "internalType": "contract IawinToken",
         "name": "",
         "type": "address"
       }

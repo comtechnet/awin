@@ -2,8 +2,8 @@ import { Container, Col, Button, Row, FloatingLabel, Form } from 'react-bootstra
 import classes from './Playground.module.css';
 import React, { useEffect, useState } from 'react';
 import Link from '../../components/Link';
-import { ImageData, getNounData, getRandomNounSeed } from '@nouns/assets';
-import { buildSVG } from '@nouns/sdk';
+import { ImageData, getNounData, getRandomawineed } from '@awin/assets';
+import { buildSVG } from '@awin/sdk';
 import Noun from '../../components/Noun';
 import NounModal from './NounModal';
 
@@ -12,26 +12,26 @@ interface Trait {
   traitNames: string[];
 }
 
-const nounsProtocolLink = (
+const awinProtocolLink = (
   <Link
-    text="Nouns Protocol"
+    text="awin Protocol"
     url="https://www.notion.so/Noun-Protocol-32e4f0bf74fe433e927e2ea35e52a507"
     leavesPage={true}
   />
 );
 
-const nounsAssetsLink = (
+const awinAssetsLink = (
   <Link
-    text="nouns-assets"
-    url="https://github.com/nounsDAO/nouns-monorepo/tree/master/packages/nouns-assets"
+    text="awin-assets"
+    url="https://github.com/awinDAO/awin-monorepo/tree/master/packages/awin-assets"
     leavesPage={true}
   />
 );
 
-const nounsSDKLink = (
+const awinSDKLink = (
   <Link
-    text="nouns-sdk"
-    url="https://github.com/nounsDAO/nouns-monorepo/tree/master/packages/nouns-sdk"
+    text="awin-sdk"
+    url="https://github.com/awinDAO/awin-monorepo/tree/master/packages/awin-sdk"
     leavesPage={true}
   />
 );
@@ -42,20 +42,20 @@ const parseTraitName = (partName: string): string =>
 const capitalizeFirstLetter = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 const Playground: React.FC = () => {
-  const [nounSvgs, setNounSvgs] = useState<string[]>();
+  const [awinvgs, setawinvgs] = useState<string[]>();
   const [traits, setTraits] = useState<Trait[]>();
   const [modSeed, setModSeed] = useState<{ [key: string]: number }>();
   const [initLoad, setInitLoad] = useState<boolean>(true);
   const [displayNoun, setDisplayNoun] = useState<boolean>(false);
   const [indexOfNounToDisplay, setIndexOfNounToDisplay] = useState<number>();
 
-  const generateNounSvg = React.useCallback(
+  const generateawinvg = React.useCallback(
     (amount: number = 1) => {
       for (let i = 0; i < amount; i++) {
-        const seed = { ...getRandomNounSeed(), ...modSeed };
+        const seed = { ...getRandomawineed(), ...modSeed };
         const { parts, background } = getNounData(seed);
         const svg = buildSVG(parts, ImageData.palette, background);
-        setNounSvgs(prev => {
+        setawinvgs(prev => {
           return prev ? [svg, ...prev] : [svg];
         });
       }
@@ -81,10 +81,10 @@ const Playground: React.FC = () => {
     );
 
     if (initLoad) {
-      generateNounSvg(8);
+      generateawinvg(8);
       setInitLoad(false);
     }
-  }, [generateNounSvg, initLoad]);
+  }, [generateawinvg, initLoad]);
 
   const traitOptions = (trait: Trait) => {
     return Array.from(Array(trait.traitNames.length + 1)).map((_, index) => {
@@ -110,12 +110,12 @@ const Playground: React.FC = () => {
 
   return (
     <>
-      {displayNoun && indexOfNounToDisplay !== undefined && nounSvgs && (
+      {displayNoun && indexOfNounToDisplay !== undefined && awinvgs && (
         <NounModal
           onDismiss={() => {
             setDisplayNoun(false);
           }}
-          svg={nounSvgs[indexOfNounToDisplay]}
+          svg={awinvgs[indexOfNounToDisplay]}
         />
       )}
 
@@ -125,9 +125,9 @@ const Playground: React.FC = () => {
             <span>Explore</span>
             <h1>Playground</h1>
             <p>
-              The playground was built using the {nounsProtocolLink}. Noun's traits are determined
-              by the Noun Seed. The seed was generated using {nounsAssetsLink} and rendered using
-              the {nounsSDKLink}.
+              The playground was built using the {awinProtocolLink}. Noun's traits are determined
+              by the Noun Seed. The seed was generated using {awinAssetsLink} and rendered using
+              the {awinSDKLink}.
             </p>
           </Col>
         </Row>
@@ -135,11 +135,11 @@ const Playground: React.FC = () => {
           <Col lg={3}>
             <Button
               onClick={() => {
-                generateNounSvg();
+                generateawinvg();
               }}
               className={classes.generateBtn}
             >
-              Generate Nouns
+              Generate awin
             </Button>
             {traits &&
               traits.map((trait, index) => {
@@ -166,14 +166,14 @@ const Playground: React.FC = () => {
                 );
               })}
             <p className={classes.nounYearsFooter}>
-              You've generated {nounSvgs ? (nounSvgs.length / 365).toFixed(2) : '0'} years worth of
-              Nouns
+              You've generated {awinvgs ? (awinvgs.length / 365).toFixed(2) : '0'} years worth of
+              awin
             </p>
           </Col>
           <Col lg={9}>
             <Row>
-              {nounSvgs &&
-                nounSvgs.map((svg, i) => {
+              {awinvgs &&
+                awinvgs.map((svg, i) => {
                   return (
                     <Col xs={4} lg={3} key={i}>
                       <div

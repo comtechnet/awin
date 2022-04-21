@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import sharp from 'sharp';
 import { isError, tryF } from 'ts-try';
-import { nounsTokenContract } from './clients';
+import { awinTokenContract } from './clients';
 import { Bid, TokenMetadata } from './types';
 
 /**
@@ -27,7 +27,7 @@ export function formatAuctionStartedTweetText(auctionId: number) {
   return `＊Bleep Bloop Blop＊
         
  An auction has started for Noun #${auctionId}
- Learn more at https://nouns.wtf`;
+ Learn more at https://awin.wtf`;
 }
 
 /**
@@ -46,7 +46,7 @@ export async function formatBidMessageText(id: number, bid: Bid) {
  * @returns The auction ending soon text
  */
 export function getAuctionEndingSoonTweetText() {
-  return `This auction is ending soon! Bid now at https://nouns.wtf`;
+  return `This auction is ending soon! Bid now at https://awin.wtf`;
 }
 
 /**
@@ -55,7 +55,7 @@ export function getAuctionEndingSoonTweetText() {
  * @returns The png buffer of the Noun or undefined
  */
 export async function getNounPngBuffer(tokenId: string): Promise<Buffer | undefined> {
-  const dataURI = await tryF(() => nounsTokenContract.dataURI(tokenId));
+  const dataURI = await tryF(() => awinTokenContract.dataURI(tokenId));
   if (isError(dataURI)) {
     console.error(`Error fetching dataURI for token ID ${tokenId}: ${dataURI.message}`);
     return;

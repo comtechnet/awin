@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The NounsToken pseudo-random seed generator
+/// @title The awinToken pseudo-random seed generator
 
 /*********************************
  * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
@@ -17,15 +17,15 @@
 
 pragma solidity ^0.8.6;
 
-import { INounsSeeder } from './interfaces/INounsSeeder.sol';
-import { INounsDescriptor } from './interfaces/INounsDescriptor.sol';
+import { IawinSeeder } from './interfaces/IawinSeeder.sol';
+import { IawinDescriptor } from './interfaces/IawinDescriptor.sol';
 
-contract NounsSeeder is INounsSeeder {
+contract awinSeeder is IawinSeeder {
     /**
      * @notice Generate a pseudo-random Noun seed using the previous blockhash and noun ID.
      */
     // prettier-ignore
-    function generateSeed(uint256 nounId, INounsDescriptor descriptor) external view override returns (Seed memory) {
+    function generateSeed(uint256 nounId, IawinDescriptor descriptor) external view override returns (Seed memory) {
         uint256 pseudorandomness = uint256(
             keccak256(abi.encodePacked(blockhash(block.number - 1), nounId))
         );

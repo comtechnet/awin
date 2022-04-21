@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppSelector } from '../../hooks';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
-import { nounsIndex } from '../../wrappers/subgraph';
+import { awinIndex } from '../../wrappers/subgraph';
 import classes from './Verify.module.css';
 import clsx from 'clsx';
 import Section from '../../layout/Section';
@@ -15,15 +15,15 @@ interface VerifyPageProp {}
 
 const VerifyPage: React.FC<VerifyPageProp> = props => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
-  const { data } = useQuery(nounsIndex());
+  const { data } = useQuery(awinIndex());
   const [messageToSign, setMessageToSign] = useState<undefined | string>(undefined);
   const [signedMessage, setSignedMessage] = useState<undefined | object>(undefined);
   const { library } = useEthers();
 
-  const extractOwnedNounIdsFromNounsIndex = (owner: string | undefined, nounsIndex: any) =>
+  const extractOwnedNounIdsFromawinIndex = (owner: string | undefined, awinIndex: any) =>
     R.pipe(
-      (nouns: any) =>
-        nouns.filter((noun: any) =>
+      (awin: any) =>
+        awin.filter((noun: any) =>
           !owner
             ? false
             : (noun.owner.id as string)
@@ -32,22 +32,22 @@ const VerifyPage: React.FC<VerifyPageProp> = props => {
         ),
       R.map((noun: any) => Number(noun.id)),
       R.sort((a: number, b: number) => a - b),
-    )(nounsIndex.nouns);
+    )(awinIndex.awin);
 
-  const loadingContent = () => <div className={classes.loadingContent}>loading your Nouns...</div>;
+  const loadingContent = () => <div className={classes.loadingContent}>loading your awin...</div>;
 
   useEffect(() => {
     if (!data) return;
-    const initialMessage = (nouns: number[]) =>
+    const initialMessage = (awin: number[]) =>
       [
         activeAccount ? `I am ${activeAccount}` : undefined,
-        nouns.length > 0
-          ? ` and I own Noun${nouns.length > 1 ? 's' : ''} ${nouns.join(', ')}`
+        awin.length > 0
+          ? ` and I own Noun${awin.length > 1 ? 's' : ''} ${awin.join(', ')}`
           : undefined,
       ]
         .filter((part: string | undefined) => part)
         .join(' ');
-    setMessageToSign(initialMessage(extractOwnedNounIdsFromNounsIndex(activeAccount, data)));
+    setMessageToSign(initialMessage(extractOwnedNounIdsFromawinIndex(activeAccount, data)));
   }, [data, activeAccount]);
 
   return (

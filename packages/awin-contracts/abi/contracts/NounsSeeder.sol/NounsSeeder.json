@@ -7,7 +7,7 @@
         "type": "uint256"
       },
       {
-        "internalType": "contract INounsDescriptor",
+        "internalType": "contract IawinDescriptor",
         "name": "descriptor",
         "type": "address"
       }
@@ -42,7 +42,7 @@
             "type": "uint48"
           }
         ],
-        "internalType": "struct INounsSeeder.Seed",
+        "internalType": "struct IawinSeeder.Seed",
         "name": "",
         "type": "tuple"
       }

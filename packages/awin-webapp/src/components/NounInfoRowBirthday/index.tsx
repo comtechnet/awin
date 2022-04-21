@@ -18,7 +18,7 @@ const NounInfoRowBirthday: React.FC<NounInfoRowBirthdayProps> = props => {
 
   // If the noun is a nounder noun, use the next noun to get the mint date.
   // We do this because we use the auction start time to get the mint date and
-  // nounder nouns do not have an auction start time.
+  // nounder awin do not have an auction start time.
   const nounIdForQuery = isNounderNoun(BigNumber.from(nounId)) ? nounId + 1 : nounId;
 
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);

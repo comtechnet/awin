@@ -4,9 +4,9 @@ import AuctionActivity from '../AuctionActivity';
 import { Row, Container } from 'react-bootstrap';
 import { setStateBackgroundColor } from '../../state/slices/application';
 import { LoadingNoun } from '../Noun';
-import { Auction as IAuction } from '../../wrappers/nounsAuction';
+import { Auction as IAuction } from '../../wrappers/awinAuction';
 import classes from './Auction.module.css';
-import { INounSeed } from '../../wrappers/nounToken';
+import { Iawineed } from '../../wrappers/nounToken';
 import NounderNounContent from '../NounderNounContent';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -29,7 +29,7 @@ const Auction: React.FC<AuctionProps> = props => {
   let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
   const lastNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
 
-  const loadedNounHandler = (seed: INounSeed) => {
+  const loadedNounHandler = (seed: Iawineed) => {
     dispatch(setStateBackgroundColor(seed.background === 0 ? grey : beige));
   };
 

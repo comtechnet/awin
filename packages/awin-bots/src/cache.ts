@@ -3,22 +3,22 @@ import { redis } from './clients';
 /**
  * Key mapped to the current auction
  */
-export const getAuctionCacheKey = 'NOUNS_AUCTION_CACHE';
+export const getAuctionCacheKey = 'awin_AUCTION_CACHE';
 
 /**
  * Key mapped to the last processed bid
  */
-export const getBidCacheKey = 'NOUNS_BID_CACHE';
+export const getBidCacheKey = 'awin_BID_CACHE';
 
 /**
  * Key mapped to the tweet id to reply updates to
  */
-export const getReplyTweetIdKey = 'NOUNS_REPLY_TWEET_ID';
+export const getReplyTweetIdKey = 'awin_REPLY_TWEET_ID';
 
 /**
  * Key mapped to the latest auction id processed for auction ending soon
  */
-export const getAuctionEndingSoonCacheKey = 'NOUNS_AUCTION_ENDING_SOON_CACHE';
+export const getAuctionEndingSoonCacheKey = 'awin_AUCTION_ENDING_SOON_CACHE';
 
 /**
  * Update the auction cache with `id`

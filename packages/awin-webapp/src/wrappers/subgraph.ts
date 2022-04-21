@@ -90,9 +90,9 @@ export const nounQuery = (id: string) => gql`
   }
  `;
 
-export const nounsIndex = () => gql`
+export const awinIndex = () => gql`
   {
-    nouns {
+    awin {
       id
       owner {
         id

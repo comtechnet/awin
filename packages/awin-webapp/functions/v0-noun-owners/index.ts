@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { nounsQuery } from '../theGraph';
+import { awinQuery } from '../theGraph';
 import * as R from 'ramda';
 import { sharedResponseHeaders } from '../utils';
 
@@ -11,18 +11,18 @@ export interface LiteNoun {
 
 const lightenNoun = R.pick(['id', 'owner', 'delegatedTo']);
 
-const lightenNouns = R.map(lightenNoun);
+const lightenawin = R.map(lightenNoun);
 
 const handler: Handler = async (event, context) => {
-  const nouns = await nounsQuery();
-  const liteNouns: LiteNoun[] = lightenNouns(nouns);
+  const awin = await awinQuery();
+  const liteawin: LiteNoun[] = lightenawin(awin);
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
       ...sharedResponseHeaders,
     },
-    body: JSON.stringify(liteNouns),
+    body: JSON.stringify(liteawin),
   };
 };
 

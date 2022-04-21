@@ -1,4 +1,4 @@
-import { NounsDAOABI, NounsDaoLogicV1Factory } from '@nouns/sdk';
+import { awinDAOABI, awinDaoLogicV1Factory } from '@awin/sdk';
 import { useContractCall, useContractCalls, useContractFunction, useEthers } from '@usedapp/core';
 import { utils, BigNumber as EthersBN } from 'ethers';
 import { defaultAbiCoder } from 'ethers/lib/utils';
@@ -79,9 +79,9 @@ export interface ProposalTransaction {
   calldata: string;
 }
 
-const abi = new utils.Interface(NounsDAOABI);
-const nounsDaoContract = new NounsDaoLogicV1Factory().attach(config.addresses.nounsDAOProxy);
-const proposalCreatedFilter = nounsDaoContract.filters?.ProposalCreated(
+const abi = new utils.Interface(awinDAOABI);
+const awinDaoContract = new awinDaoLogicV1Factory().attach(config.addresses.awinDAOProxy);
+const proposalCreatedFilter = awinDaoContract.filters?.ProposalCreated(
   null,
   null,
   null,
@@ -100,7 +100,7 @@ export const useHasVotedOnProposal = (proposalId: string | undefined): boolean =
   const [receipt] =
     useContractCall<[any]>({
       abi,
-      address: nounsDaoContract.address,
+      address: awinDaoContract.address,
       method: 'getReceipt',
       args: [proposalId, account],
     }) || [];
@@ -111,7 +111,7 @@ export const useProposalCount = (): number | undefined => {
   const [count] =
     useContractCall<[EthersBN]>({
       abi,
-      address: nounsDaoContract.address,
+      address: awinDaoContract.address,
       method: 'proposalCount',
       args: [],
     }) || [];
@@ -122,18 +122,18 @@ export const useProposalThreshold = (): number | undefined => {
   const [count] =
     useContractCall<[EthersBN]>({
       abi,
-      address: nounsDaoContract.address,
+      address: awinDaoContract.address,
       method: 'proposalThreshold',
       args: [],
     }) || [];
   return count?.toNumber();
 };
 
-const useVotingDelay = (nounsDao: string): number | undefined => {
+const useVotingDelay = (awinDao: string): number | undefined => {
   const [blockDelay] =
     useContractCall<[EthersBN]>({
       abi,
-      address: nounsDao,
+      address: awinDao,
       method: 'votingDelay',
       args: [],
     }) || [];
@@ -179,7 +179,7 @@ const useFormattedProposalCreatedLogs = () => {
 
 export const useAllProposals = (): ProposalData => {
   const proposalCount = useProposalCount();
-  const votingDelay = useVotingDelay(nounsDaoContract.address);
+  const votingDelay = useVotingDelay(awinDaoContract.address);
 
   const govProposalIndexes = useMemo(() => {
     return countToIndices(proposalCount);
@@ -188,7 +188,7 @@ export const useAllProposals = (): ProposalData => {
   const proposals = useContractCalls<ProposalCallResult>(
     govProposalIndexes.map(index => ({
       abi,
-      address: nounsDaoContract.address,
+      address: awinDaoContract.address,
       method: 'proposals',
       args: [index],
     })),
@@ -197,7 +197,7 @@ export const useAllProposals = (): ProposalData => {
   const proposalStates = useContractCalls<[ProposalState]>(
     govProposalIndexes.map(index => ({
       abi,
-      address: nounsDaoContract.address,
+      address: awinDaoContract.address,
       method: 'state',
       args: [index],
     })),
@@ -278,20 +278,20 @@ export const useProposal = (id: string | number): Proposal | undefined => {
 
 export const useCastVote = () => {
   const { send: castVote, state: castVoteState } = useContractFunction(
-    nounsDaoContract,
+    awinDaoContract,
     'castVote',
   );
   return { castVote, castVoteState };
 };
 
 export const usePropose = () => {
-  const { send: propose, state: proposeState } = useContractFunction(nounsDaoContract, 'propose');
+  const { send: propose, state: proposeState } = useContractFunction(awinDaoContract, 'propose');
   return { propose, proposeState };
 };
 
 export const useQueueProposal = () => {
   const { send: queueProposal, state: queueProposalState } = useContractFunction(
-    nounsDaoContract,
+    awinDaoContract,
     'queue',
   );
   return { queueProposal, queueProposalState };
@@ -299,7 +299,7 @@ export const useQueueProposal = () => {
 
 export const useExecuteProposal = () => {
   const { send: executeProposal, state: executeProposalState } = useContractFunction(
-    nounsDaoContract,
+    awinDaoContract,
     'execute',
   );
   return { executeProposal, executeProposalState };

@@ -4,7 +4,7 @@ import Section from '../../layout/Section';
 import classes from './ProfileActivityFeed.module.css';
 
 import { useQuery } from '@apollo/client';
-import { Proposal, useAllProposals } from '../../wrappers/nounsDao';
+import { Proposal, useAllProposals } from '../../wrappers/awinDao';
 import { nounVotingHistoryQuery } from '../../wrappers/subgraph';
 import NounProfileVoteRow from '../NounProfileVoteRow';
 import { LoadingNoun } from '../Noun';
@@ -63,7 +63,7 @@ const ProfileActivityFeed: React.FC<ProfileActivityFeedProps> = props => {
                     <NounProfileVoteRow
                       proposal={p}
                       nounVoted={proposalsVotedOn.includes(p.id)}
-                      nounSupported={supportedProposals.includes(p.id)}
+                      awinupported={supportedProposals.includes(p.id)}
                       latestProposalId={latestProposalId}
                       nounId={nounId}
                       key={i}

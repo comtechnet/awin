@@ -7,7 +7,7 @@ import {
   useProposalCount,
   useProposalThreshold,
   usePropose,
-} from '../../wrappers/nounsDao';
+} from '../../wrappers/awinDao';
 import { useUserVotes } from '../../wrappers/nounToken';
 import classes from './CreateProposal.module.css';
 import { Link } from 'react-router-dom';

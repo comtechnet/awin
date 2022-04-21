@@ -1,6 +1,6 @@
 import { useContractCall, useEthers } from '@usedapp/core';
 import { BigNumber as EthersBN, utils } from 'ethers';
-import { NounsTokenABI } from '@nouns/contracts';
+import { awinTokenABI } from '@awin/contracts';
 import config from '../config';
 
 interface NounToken {
@@ -9,7 +9,7 @@ interface NounToken {
   image: string;
 }
 
-export interface INounSeed {
+export interface Iawineed {
   accessory: number;
   background: number;
   body: number;
@@ -17,13 +17,13 @@ export interface INounSeed {
   head: number;
 }
 
-const abi = new utils.Interface(NounsTokenABI);
+const abi = new utils.Interface(awinTokenABI);
 
 export const useNounToken = (nounId: EthersBN) => {
   const [noun] =
     useContractCall<[string]>({
       abi,
-      address: config.addresses.nounsToken,
+      address: config.addresses.awinToken,
       method: 'dataURI',
       args: [nounId],
     }) || [];
@@ -38,10 +38,10 @@ export const useNounToken = (nounId: EthersBN) => {
   return json;
 };
 
-export const useNounSeed = (nounId: EthersBN) => {
-  const seed = useContractCall<INounSeed>({
+export const useawineed = (nounId: EthersBN) => {
+  const seed = useContractCall<Iawineed>({
     abi,
-    address: config.addresses.nounsToken,
+    address: config.addresses.awinToken,
     method: 'seeds',
     args: [nounId],
   });
@@ -53,7 +53,7 @@ export const useUserVotes = (): number | undefined => {
   const [votes] =
     useContractCall<[EthersBN]>({
       abi,
-      address: config.addresses.nounsToken,
+      address: config.addresses.awinToken,
       method: 'getCurrentVotes',
       args: [account],
     }) || [];
@@ -65,7 +65,7 @@ export const useUserDelegatee = (): string | undefined => {
   const [delegate] =
     useContractCall<[string]>({
       abi,
-      address: config.addresses.nounsToken,
+      address: config.addresses.awinToken,
       method: 'delegates',
       args: [account],
     }) || [];
@@ -79,7 +79,7 @@ export const useUserVotesAsOfBlock = (block: number | undefined): number | undef
   const [votes] =
     useContractCall<[EthersBN]>({
       abi,
-      address: config.addresses.nounsToken,
+      address: config.addresses.awinToken,
       method: 'getPriorVotes',
       args: [account, block],
     }) || [];

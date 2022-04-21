@@ -1,4 +1,4 @@
-# @nouns/assets
+# @awin/assets
 
 ## Development
 
@@ -13,7 +13,7 @@ yarn
 **Access Noun RLE Image Data**
 
 ```ts
-import { ImageData } from '@nouns/assets';
+import { ImageData } from '@awin/assets';
 
 const { bgcolors, palette, images } = ImageData;
 const { bodies, accessories, heads, glasses } = images;
@@ -22,7 +22,7 @@ const { bodies, accessories, heads, glasses } = images;
 **Get Noun Part & Background Data**
 
 ```ts
-import { getNounData } from '@nouns/assets';
+import { getNounData } from '@awin/assets';
 
 const seed = {
   background: 0,

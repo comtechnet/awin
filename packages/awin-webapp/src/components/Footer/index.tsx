@@ -8,7 +8,7 @@ import Link from '../Link';
 const Footer = () => {
   const twitterURL = externalURL(ExternalURL.twitter);
   const discordURL = externalURL(ExternalURL.discord);
-  const etherscanURL = buildEtherscanAddressLink(config.addresses.nounsToken);
+  const etherscanURL = buildEtherscanAddressLink(config.addresses.awinToken);
   const discourseURL = externalURL(ExternalURL.discourse);
 
   return (

@@ -7,7 +7,7 @@ const { ethers } = hardhat;
 import { BigNumber as EthersBN } from 'ethers';
 
 import {
-  deployNounsToken,
+  deployawinToken,
   getSigners,
   TestSigners,
   setTotalSupply,
@@ -26,12 +26,12 @@ import {
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 import {
-  NounsToken,
-  NounsDescriptorFactory,
-  NounsDaoExecutorHarness,
-  NounsDaoExecutorHarnessFactory,
-  NounsDaoImmutable,
-  NounsDaoImmutableFactory,
+  awinToken,
+  awinDescriptorFactory,
+  awinDaoExecutorHarness,
+  awinDaoExecutorHarnessFactory,
+  awinDaoImmutable,
+  awinDaoImmutableFactory,
 } from '../../../typechain';
 
 chai.use(solidity);
@@ -48,14 +48,14 @@ const states: string[] = [
   'Executed',
 ];
 
-let token: NounsToken;
+let token: awinToken;
 let deployer: SignerWithAddress;
 let account0: SignerWithAddress;
 let account1: SignerWithAddress;
 let signers: TestSigners;
 
-let gov: NounsDaoImmutable;
-let timelock: NounsDaoExecutorHarness;
+let gov: awinDaoImmutable;
+let timelock: awinDaoExecutorHarness;
 let delay: number;
 
 let targets: string[];
@@ -82,9 +82,9 @@ async function makeProposal(
 
   delay = 4 * 24 * 60 * 60;
 
-  timelock = await new NounsDaoExecutorHarnessFactory(deployer).deploy(deployer.address, delay);
+  timelock = await new awinDaoExecutorHarnessFactory(deployer).deploy(deployer.address, delay);
 
-  gov = await new NounsDaoImmutableFactory(deployer).deploy(
+  gov = await new awinDaoImmutableFactory(deployer).deploy(
     timelock.address,
     token.address,
     address(0),
@@ -111,7 +111,7 @@ async function makeProposal(
   proposalId = await gov.latestProposalIds(proposer.address);
 }
 
-describe('NounsDAO#state/1', () => {
+describe('awinDAO#state/1', () => {
   before(async () => {
     await freezeTime(100);
     signers = await getSigners();
@@ -119,10 +119,10 @@ describe('NounsDAO#state/1', () => {
     account0 = signers.account0;
     account1 = signers.account1;
 
-    token = await deployNounsToken(signers.deployer);
+    token = await deployawinToken(signers.deployer);
 
     await populateDescriptor(
-      NounsDescriptorFactory.connect(await token.descriptor(), signers.deployer),
+      awinDescriptorFactory.connect(await token.descriptor(), signers.deployer),
     );
   });
 
@@ -136,7 +136,7 @@ describe('NounsDAO#state/1', () => {
 
   it('Invalid for proposal not found', async () => {
     await makeProposal();
-    await expect(gov.state(5)).revertedWith('NounsDAO::state: invalid proposal id');
+    await expect(gov.state(5)).revertedWith('awinDAO::state: invalid proposal id');
   });
 
   it('Pending', async () => {

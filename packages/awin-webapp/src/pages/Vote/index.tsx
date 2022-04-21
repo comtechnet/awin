@@ -8,7 +8,7 @@ import {
   useProposal,
   useQueueProposal,
   Vote,
-} from '../../wrappers/nounsDao';
+} from '../../wrappers/awinDao';
 import { useUserVotesAsOfBlock } from '../../wrappers/nounToken';
 import classes from './Vote.module.css';
 import { Link, RouteComponentProps } from 'react-router-dom';

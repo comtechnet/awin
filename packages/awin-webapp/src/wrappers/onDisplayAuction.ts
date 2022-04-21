@@ -2,7 +2,7 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { useAppSelector } from '../hooks';
 import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun';
 import { Bid, BidEvent } from '../utils/types';
-import { Auction } from './nounsAuction';
+import { Auction } from './awinAuction';
 
 const deserializeAuction = (reduxSafeAuction: Auction): Auction => {
   return {

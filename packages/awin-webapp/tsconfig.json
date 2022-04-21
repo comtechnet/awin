@@ -22,7 +22,7 @@
   ],
   "references": [
     {
-      "path": "../nouns-contracts/tsconfig.build.json"
+      "path": "../awin-contracts/tsconfig.build.json"
     }
   ]
 }

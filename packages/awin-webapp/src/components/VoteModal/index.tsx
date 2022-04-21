@@ -1,6 +1,6 @@
 import { Button, Modal, Spinner } from 'react-bootstrap';
 import classes from './VoteModal.module.css';
-import { Vote } from '../../wrappers/nounsDao';
+import { Vote } from '../../wrappers/awinDao';
 
 interface VoteModalProps {
   show: boolean;

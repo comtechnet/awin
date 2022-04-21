@@ -5,7 +5,7 @@ import { StandaloneNounWithSeed } from '../../components/StandaloneNoun';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setStateBackgroundColor } from '../../state/slices/application';
 import { grey, beige } from '../../utils/nounBgColors';
-import { INounSeed } from '../../wrappers/nounToken';
+import { Iawineed } from '../../wrappers/nounToken';
 
 import classes from './Profile.module.css';
 
@@ -23,7 +23,7 @@ const ProfilePage: React.FC<ProfilePageProps> = props => {
   const lastAuctionNounId = useAppSelector(state => state.onDisplayAuction.lastAuctionNounId);
   let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
 
-  const loadedNounHandler = (seed: INounSeed) => {
+  const loadedNounHandler = (seed: Iawineed) => {
     dispatch(setStateBackgroundColor(seed.background === 0 ? grey : beige));
   };
 

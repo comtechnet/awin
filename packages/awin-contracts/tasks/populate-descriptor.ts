@@ -10,18 +10,18 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     types.string,
   )
   .addOptionalParam(
-    'nounsDescriptor',
-    'The `NounsDescriptor` contract address',
+    'awinDescriptor',
+    'The `awinDescriptor` contract address',
     '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
     types.string,
   )
-  .setAction(async ({ nftDescriptor, nounsDescriptor }, { ethers }) => {
-    const descriptorFactory = await ethers.getContractFactory('NounsDescriptor', {
+  .setAction(async ({ nftDescriptor, awinDescriptor }, { ethers }) => {
+    const descriptorFactory = await ethers.getContractFactory('awinDescriptor', {
       libraries: {
         NFTDescriptor: nftDescriptor,
       },
     });
-    const descriptorContract = descriptorFactory.attach(nounsDescriptor);
+    const descriptorContract = descriptorFactory.attach(awinDescriptor);
 
     const { bgcolors, palette, images } = ImageData;
     const { bodies, accessories, heads, glasses } = images;

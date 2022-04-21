@@ -7,7 +7,7 @@ const { ethers } = hardhat;
 import { BigNumber as EthersBN } from 'ethers';
 
 import {
-  deployNounsToken,
+  deployawinToken,
   getSigners,
   TestSigners,
   setTotalSupply,
@@ -18,25 +18,25 @@ import { mineBlock, address, encodeParameters, advanceBlocks } from '../../utils
 
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import {
-  NounsToken,
-  NounsDescriptorFactory,
-  NounsDaoProxyFactory,
-  NounsDaoLogicV1,
-  NounsDaoLogicV1Factory,
-  NounsDaoExecutorFactory,
+  awinToken,
+  awinDescriptorFactory,
+  awinDaoProxyFactory,
+  awinDaoLogicV1,
+  awinDaoLogicV1Factory,
+  awinDaoExecutorFactory,
 } from '../../../typechain';
 
 chai.use(solidity);
 const { expect } = chai;
 
 async function reset(): Promise<void> {
-  // nonce 0: Deploy NounsDAOExecutor
-  // nonce 1: Deploy NounsDAOLogicV1
+  // nonce 0: Deploy awinDAOExecutor
+  // nonce 1: Deploy awinDAOLogicV1
   // nonce 2: Deploy nftDescriptorLibraryFactory
-  // nonce 3: Deploy NounsDescriptor
-  // nonce 4: Deploy NounsSeeder
-  // nonce 5: Deploy NounsToken
-  // nonce 6: Deploy NounsDAOProxy
+  // nonce 3: Deploy awinDescriptor
+  // nonce 4: Deploy awinSeeder
+  // nonce 5: Deploy awinToken
+  // nonce 6: Deploy awinDAOProxy
   // nonce 7+: populate Descriptor
 
   const govDelegatorAddress = ethers.utils.getContractAddress({
@@ -44,19 +44,19 @@ async function reset(): Promise<void> {
     nonce: (await deployer.getTransactionCount()) + 6,
   });
 
-  // Deploy NounsDAOExecutor with pre-computed Delegator address
-  const { address: timelockAddress } = await new NounsDaoExecutorFactory(deployer).deploy(
+  // Deploy awinDAOExecutor with pre-computed Delegator address
+  const { address: timelockAddress } = await new awinDaoExecutorFactory(deployer).deploy(
     govDelegatorAddress,
     timelockDelay,
   );
 
   // Deploy Delegate
-  const { address: govDelegateAddress } = await new NounsDaoLogicV1Factory(deployer).deploy();
-  // Deploy Nouns token
-  token = await deployNounsToken(deployer);
+  const { address: govDelegateAddress } = await new awinDaoLogicV1Factory(deployer).deploy();
+  // Deploy awin token
+  token = await deployawinToken(deployer);
 
   // Deploy Delegator
-  await new NounsDaoProxyFactory(deployer).deploy(
+  await new awinDaoProxyFactory(deployer).deploy(
     timelockAddress,
     token.address,
     address(0),
@@ -69,9 +69,9 @@ async function reset(): Promise<void> {
   );
 
   // Cast Delegator as Delegate
-  gov = NounsDaoLogicV1Factory.connect(govDelegatorAddress, deployer);
+  gov = awinDaoLogicV1Factory.connect(govDelegatorAddress, deployer);
 
-  await populateDescriptor(NounsDescriptorFactory.connect(await token.descriptor(), deployer));
+  await populateDescriptor(awinDescriptorFactory.connect(await token.descriptor(), deployer));
 }
 
 async function propose(proposer: SignerWithAddress) {
@@ -84,14 +84,14 @@ async function propose(proposer: SignerWithAddress) {
   proposalId = await gov.latestProposalIds(proposer.address);
 }
 
-let token: NounsToken;
+let token: awinToken;
 let deployer: SignerWithAddress;
 let account0: SignerWithAddress;
 let account1: SignerWithAddress;
 let account2: SignerWithAddress;
 let signers: TestSigners;
 
-let gov: NounsDaoLogicV1;
+let gov: awinDaoLogicV1;
 const timelockDelay = 172800; // 2 days
 
 const proposalThresholdBPS = 678; // 6.78%
@@ -103,7 +103,7 @@ let signatures: string[];
 let callDatas: string[];
 let proposalId: EthersBN;
 
-describe('NounsDAO#inflationHandling', () => {
+describe('awinDAO#inflationHandling', () => {
   before(async () => {
     signers = await getSigners();
     deployer = signers.deployer;
@@ -142,7 +142,7 @@ describe('NounsDAO#inflationHandling', () => {
     await mineBlock();
     await expect(
       gov.connect(account0).propose(targets, values, signatures, callDatas, 'do nothing'),
-    ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
+    ).revertedWith('awinDAO::propose: proposer votes below proposal threshold');
   });
   it('allows proposing if above threshold', async () => {
     // account0 has 3 token, requires 3
@@ -185,7 +185,7 @@ describe('NounsDAO#inflationHandling', () => {
     // account1 has 3 tokens, but requires 5 to pass new proposal threshold when totalSupply = 80 and threshold = 5%
     await expect(
       gov.connect(account1).propose(targets, values, signatures, callDatas, 'do nothing'),
-    ).revertedWith('NounsDAO::propose: proposer votes below proposal threshold');
+    ).revertedWith('awinDAO::propose: proposer votes below proposal threshold');
   });
 
   it('does not change previous proposal attributes when total supply changes', async () => {

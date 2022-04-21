@@ -6,30 +6,30 @@ import { Signer } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { NounsSeeder } from "./NounsSeeder";
+import type { awinSeeder } from "./awinSeeder";
 
-export class NounsSeederFactory extends ContractFactory {
+export class awinSeederFactory extends ContractFactory {
   constructor(signer?: Signer) {
     super(_abi, _bytecode, signer);
   }
 
-  deploy(overrides?: Overrides): Promise<NounsSeeder> {
-    return super.deploy(overrides || {}) as Promise<NounsSeeder>;
+  deploy(overrides?: Overrides): Promise<awinSeeder> {
+    return super.deploy(overrides || {}) as Promise<awinSeeder>;
   }
   getDeployTransaction(overrides?: Overrides): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
-  attach(address: string): NounsSeeder {
-    return super.attach(address) as NounsSeeder;
+  attach(address: string): awinSeeder {
+    return super.attach(address) as awinSeeder;
   }
-  connect(signer: Signer): NounsSeederFactory {
-    return super.connect(signer) as NounsSeederFactory;
+  connect(signer: Signer): awinSeederFactory {
+    return super.connect(signer) as awinSeederFactory;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): NounsSeeder {
-    return new Contract(address, _abi, signerOrProvider) as NounsSeeder;
+  ): awinSeeder {
+    return new Contract(address, _abi, signerOrProvider) as awinSeeder;
   }
 }
 
@@ -42,7 +42,7 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "contract INounsDescriptor",
+        internalType: "contract IawinDescriptor",
         name: "descriptor",
         type: "address",
       },
@@ -77,7 +77,7 @@ const _abi = [
             type: "uint48",
           },
         ],
-        internalType: "struct INounsSeeder.Seed",
+        internalType: "struct IawinSeeder.Seed",
         name: "",
         type: "tuple",
       },

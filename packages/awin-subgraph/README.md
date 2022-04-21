@@ -1,6 +1,6 @@
-# @nouns/subgraph
+# @awin/subgraph
 
-A subgraph that indexes nouns events.
+A subgraph that indexes awin events.
 
 ## Quickstart
 
@@ -8,7 +8,7 @@ A subgraph that indexes nouns events.
 yarn
 ```
 
-## Nouns subgraph
+## awin subgraph
 
 This repo contains the templates for compiling and deploying a graphql schema to thegraph.
 

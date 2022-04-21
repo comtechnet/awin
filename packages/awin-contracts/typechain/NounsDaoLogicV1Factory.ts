@@ -6,30 +6,30 @@ import { Signer } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { NounsDaoLogicV1 } from "./NounsDaoLogicV1";
+import type { awinDaoLogicV1 } from "./awinDaoLogicV1";
 
-export class NounsDaoLogicV1Factory extends ContractFactory {
+export class awinDaoLogicV1Factory extends ContractFactory {
   constructor(signer?: Signer) {
     super(_abi, _bytecode, signer);
   }
 
-  deploy(overrides?: Overrides): Promise<NounsDaoLogicV1> {
-    return super.deploy(overrides || {}) as Promise<NounsDaoLogicV1>;
+  deploy(overrides?: Overrides): Promise<awinDaoLogicV1> {
+    return super.deploy(overrides || {}) as Promise<awinDaoLogicV1>;
   }
   getDeployTransaction(overrides?: Overrides): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
-  attach(address: string): NounsDaoLogicV1 {
-    return super.attach(address) as NounsDaoLogicV1;
+  attach(address: string): awinDaoLogicV1 {
+    return super.attach(address) as awinDaoLogicV1;
   }
-  connect(signer: Signer): NounsDaoLogicV1Factory {
-    return super.connect(signer) as NounsDaoLogicV1Factory;
+  connect(signer: Signer): awinDaoLogicV1Factory {
+    return super.connect(signer) as awinDaoLogicV1Factory;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): NounsDaoLogicV1 {
-    return new Contract(address, _abi, signerOrProvider) as NounsDaoLogicV1;
+  ): awinDaoLogicV1 {
+    return new Contract(address, _abi, signerOrProvider) as awinDaoLogicV1;
   }
 }
 
@@ -817,7 +817,7 @@ const _abi = [
             type: "uint96",
           },
         ],
-        internalType: "struct NounsDAOStorageV1.Receipt",
+        internalType: "struct awinDAOStorageV1.Receipt",
         name: "",
         type: "tuple",
       },
@@ -847,7 +847,7 @@ const _abi = [
       },
       {
         internalType: "address",
-        name: "nouns_",
+        name: "awin_",
         type: "address",
       },
       {
@@ -915,10 +915,10 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "nouns",
+    name: "awin",
     outputs: [
       {
-        internalType: "contract NounsTokenLike",
+        internalType: "contract awinTokenLike",
         name: "",
         type: "address",
       },
@@ -1159,7 +1159,7 @@ const _abi = [
     name: "state",
     outputs: [
       {
-        internalType: "enum NounsDAOStorageV1.ProposalState",
+        internalType: "enum awinDAOStorageV1.ProposalState",
         name: "",
         type: "uint8",
       },
@@ -1172,7 +1172,7 @@ const _abi = [
     name: "timelock",
     outputs: [
       {
-        internalType: "contract INounsDAOExecutor",
+        internalType: "contract IawinDAOExecutor",
         name: "",
         type: "address",
       },

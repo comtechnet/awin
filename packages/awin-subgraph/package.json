@@ -1,9 +1,9 @@
 {
-  "name": "@nouns/subgraph",
+  "name": "@awin/subgraph",
   "version": "0.1.0",
-  "description": "A subgraph that indexes nouns events",
+  "description": "A subgraph that indexes awin events",
   "author": "Nounders",
-  "homepage": "https://nouns.wtf",
+  "homepage": "https://awin.wtf",
   "license": "GPL-3.0",
   "main": "build/index.js",
   "directories": {
@@ -15,8 +15,8 @@
     "deploy": "graph deploy --debug --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
     "prepare:rinkeby": "mustache config/rinkeby.json subgraph.yaml.mustache > subgraph.yaml",
     "prepare:mainnet": "mustache config/mainnet.json subgraph.yaml.mustache > subgraph.yaml",
-    "deploy:rinkeby": "yarn clean && yarn prepare:rinkeby && yarn codegen && yarn deploy nounsdao/nouns-subgraph-rinkeby",
-    "deploy:mainnet": "yarn clean && yarn prepare:mainnet && yarn codegen && yarn deploy nounsdao/nouns-subgraph"
+    "deploy:rinkeby": "yarn clean && yarn prepare:rinkeby && yarn codegen && yarn deploy awindao/awin-subgraph-rinkeby",
+    "deploy:mainnet": "yarn clean && yarn prepare:mainnet && yarn codegen && yarn deploy awindao/awin-subgraph"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.20.1",

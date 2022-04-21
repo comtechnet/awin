@@ -4,7 +4,7 @@ import {
   AuctionCreated,
   AuctionExtended,
   AuctionSettled,
-} from './types/NounsAuctionHouse/NounsAuctionHouse';
+} from './types/awinAuctionHouse/awinAuctionHouse';
 import { Auction, Noun, Bid } from './types/schema';
 import { getOrCreateAccount } from './utils/helpers';
 

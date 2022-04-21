@@ -23,9 +23,9 @@ task('deploy-ci', 'Deploy contracts (automated by CI)')
       JSON.stringify({
         contractAddresses: {
           NFTDescriptor: contracts.NFTDescriptor.address,
-          NounsDescriptor: contracts.NounsDescriptor.address,
-          NounsSeeder: contracts.NounsSeeder.address,
-          NounsToken: contracts.NounsToken.address,
+          awinDescriptor: contracts.awinDescriptor.address,
+          awinSeeder: contracts.awinSeeder.address,
+          awinToken: contracts.awinToken.address,
         },
         gitHub: {
           // Get the commit sha when running in CI

@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import { NormalizedVote, nounsQuery } from '../theGraph';
+import { NormalizedVote, awinQuery } from '../theGraph';
 import * as R from 'ramda';
 import { sharedResponseHeaders } from '../utils';
 
@@ -15,8 +15,8 @@ const buildNounVote = R.pick(['id', 'owner', 'delegatedTo', 'votes']);
 const buildNounVotes = R.map(buildNounVote);
 
 const handler: Handler = async (event, context) => {
-  const nouns = await nounsQuery();
-  const nounVotes: NounVote[] = buildNounVotes(nouns);
+  const awin = await awinQuery();
+  const nounVotes: NounVote[] = buildNounVotes(awin);
   return {
     statusCode: 200,
     headers: {

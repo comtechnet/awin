@@ -17,7 +17,7 @@
 
 pragma solidity ^0.8.6;
 
-interface INounsAuctionHouse {
+interface IawinAuctionHouse {
     struct Auction {
         // ID for the Noun (ERC721 token ID)
         uint256 nounId;

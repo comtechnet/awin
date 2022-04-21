@@ -5,25 +5,25 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: NounsAuctionHouse
+    name: awinAuctionHouse
     network: {{network}}
     source:
-      address: '{{nounsAuctionHouse.address}}'
-      abi: NounsAuctionHouse
-      startBlock: {{nounsAuctionHouse.startBlock}}
+      address: '{{awinAuctionHouse.address}}'
+      abi: awinAuctionHouse
+      startBlock: {{awinAuctionHouse.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/nouns-auction-house.ts
+      file: ./src/awin-auction-house.ts
       entities:
         - Account
         - Auction
         - Bid
         - Noun
       abis:
-        - name: NounsAuctionHouse
-          file: ../nouns-contracts/abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json
+        - name: awinAuctionHouse
+          file: ../awin-contracts/abi/contracts/awinAuctionHouse.sol/awinAuctionHouse.json
       eventHandlers:
         - event: AuctionCreated(indexed uint256,uint256,uint256)
           handler: handleAuctionCreated
@@ -34,17 +34,17 @@ dataSources:
         - event: AuctionSettled(indexed uint256,address,uint256)
           handler: handleAuctionSettled
   - kind: ethereum/contract
-    name: NounsToken
+    name: awinToken
     network: {{network}}
     source:
-      address: '{{nounsToken.address}}'
-      abi: NounsToken
-      startBlock: {{nounsToken.startBlock}}
+      address: '{{awinToken.address}}'
+      abi: awinToken
+      startBlock: {{awinToken.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/nouns-erc-721.ts
+      file: ./src/awin-erc-721.ts
       entities:
         - Noun
         - Seed
@@ -52,8 +52,8 @@ dataSources:
         - Delegate
         - Governance
       abis:
-        - name: NounsToken
-          file: ../nouns-contracts/abi/contracts/NounsToken.sol/NounsToken.json
+        - name: awinToken
+          file: ../awin-contracts/abi/contracts/awinToken.sol/awinToken.json
       eventHandlers:
         - event: NounCreated(indexed uint256,(uint48,uint48,uint48,uint48,uint48))
           handler: handleNounCreated
@@ -64,17 +64,17 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
   - kind: ethereum/contract
-    name: NounsDAO
+    name: awinDAO
     network: {{network}}
     source:
-      address: '{{nounsDAO.address}}'
-      abi: NounsDAO
-      startBlock: {{nounsDAO.startBlock}}
+      address: '{{awinDAO.address}}'
+      abi: awinDAO
+      startBlock: {{awinDAO.startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/nouns-dao.ts
+      file: ./src/awin-dao.ts
       entities:
         - Account
         - Delegate
@@ -82,8 +82,8 @@ dataSources:
         - Vote
         - Governance
       abis:
-        - name: NounsDAO
-          file: ../nouns-contracts/abi/contracts/governance/NounsDAOLogicV1.sol/NounsDAOLogicV1.json
+        - name: awinDAO
+          file: ../awin-contracts/abi/contracts/governance/awinDAOLogicV1.sol/awinDAOLogicV1.json
       eventHandlers:
         - event: ProposalCreatedWithRequirements(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,uint256,uint256,string)
           handler: handleProposalCreatedWithRequirements

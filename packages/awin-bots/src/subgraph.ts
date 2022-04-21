@@ -8,7 +8,7 @@ import { AuctionBids } from './types';
  */
 export async function getLastAuctionBids(): Promise<AuctionBids> {
   const res = await request<{ auctions: AuctionBids[] }>(
-    config.nounsSubgraph,
+    config.awinSubgraph,
     gql`
       query {
         auctions(orderBy: startTime, orderDirection: desc, first: 1) {

@@ -1,14 +1,14 @@
-# Nouns Serverless API
+# awin Serverless API
 
-`nouns.wtf` provides a serverless API to make fetching data about the Nouns ecosystem easier. [An Insomnia manifest is provided for example.](./docs/insomnia.json)
+`awin.wtf` provides a serverless API to make fetching data about the awin ecosystem easier. [An Insomnia manifest is provided for example.](./docs/insomnia.json)
 
 ## Keeping Up To Date
 
-Nouns is a new project and these API endpoints may change, be sure to join [`#developers` in the Nouns Discord](https://discord.gg/nouns) to keep informed.
+awin is a new project and these API endpoints may change, be sure to join [`#developers` in the awin Discord](https://discord.gg/awin) to keep informed.
 
 ## API Convention
 
-`https://nouns.wtf/.netlify/functions/<version>/<function name>`
+`https://awin.wtf/.netlify/functions/<version>/<function name>`
 
 ## `V0`
 

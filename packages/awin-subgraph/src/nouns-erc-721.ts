@@ -4,7 +4,7 @@ import {
   DelegateVotesChanged,
   NounCreated,
   Transfer,
-} from './types/NounsToken/NounsToken';
+} from './types/awinToken/awinToken';
 import { Noun, Seed } from './types/schema';
 import { BIGINT_ONE, BIGINT_ZERO, ZERO_ADDRESS } from './utils/constants';
 import { getGovernanceEntity, getOrCreateDelegate, getOrCreateAccount } from './utils/helpers';
@@ -33,28 +33,28 @@ export function handleNounCreated(event: NounCreated): void {
   noun.save();
 }
 
-let accountNouns: string[] = []; // Use WebAssembly global due to lack of closure support
+let accountawin: string[] = []; // Use WebAssembly global due to lack of closure support
 export function handleDelegateChanged(event: DelegateChanged): void {
   let tokenHolder = getOrCreateAccount(event.params.delegator.toHexString());
   let previousDelegate = getOrCreateDelegate(event.params.fromDelegate.toHexString());
   let newDelegate = getOrCreateDelegate(event.params.toDelegate.toHexString());
-  accountNouns = tokenHolder.nouns;
+  accountawin = tokenHolder.awin;
 
   tokenHolder.delegate = newDelegate.id;
   tokenHolder.save();
 
   previousDelegate.tokenHoldersRepresentedAmount =
     previousDelegate.tokenHoldersRepresentedAmount - 1;
-  let previousNounsRepresented = previousDelegate.nounsRepresented; // Re-assignment required to update array
-  previousDelegate.nounsRepresented = previousNounsRepresented.filter(
-    n => !accountNouns.includes(n),
+  let previousawinRepresented = previousDelegate.awinRepresented; // Re-assignment required to update array
+  previousDelegate.awinRepresented = previousawinRepresented.filter(
+    n => !accountawin.includes(n),
   );
   newDelegate.tokenHoldersRepresentedAmount = newDelegate.tokenHoldersRepresentedAmount + 1;
-  let newNounsRepresented = newDelegate.nounsRepresented; // Re-assignment required to update array
-  for (let i = 0; i < accountNouns.length; i++) {
-    newNounsRepresented.push(accountNouns[i]);
+  let newawinRepresented = newDelegate.awinRepresented; // Re-assignment required to update array
+  for (let i = 0; i < accountawin.length; i++) {
+    newawinRepresented.push(accountawin[i]);
   }
-  newDelegate.nounsRepresented = newNounsRepresented;
+  newDelegate.awinRepresented = newawinRepresented;
   previousDelegate.save();
   newDelegate.save();
 }
@@ -94,13 +94,13 @@ export function handleTransfer(event: Transfer): void {
     let fromHolderPreviousBalance = fromHolder.tokenBalanceRaw;
     fromHolder.tokenBalanceRaw = fromHolder.tokenBalanceRaw - BIGINT_ONE;
     fromHolder.tokenBalance = fromHolder.tokenBalanceRaw;
-    let fromHolderNouns = fromHolder.nouns; // Re-assignment required to update array
-    fromHolder.nouns = fromHolderNouns.filter(n => n !== transferredNounId);
+    let fromHolderawin = fromHolder.awin; // Re-assignment required to update array
+    fromHolder.awin = fromHolderawin.filter(n => n !== transferredNounId);
 
     if (fromHolder.delegate != null) {
       let fromHolderDelegate = getOrCreateDelegate(fromHolder.delegate);
-      let fromHolderNounsRepresented = fromHolderDelegate.nounsRepresented; // Re-assignment required to update array
-      fromHolderDelegate.nounsRepresented = fromHolderNounsRepresented.filter(
+      let fromHolderawinRepresented = fromHolderDelegate.awinRepresented; // Re-assignment required to update array
+      fromHolderDelegate.awinRepresented = fromHolderawinRepresented.filter(
         n => n !== transferredNounId,
       );
       fromHolderDelegate.save();
@@ -136,9 +136,9 @@ export function handleTransfer(event: Transfer): void {
   }
 
   let toHolderDelegate = getOrCreateDelegate(toHolder.id);
-  let toHolderNounsRepresented = toHolderDelegate.nounsRepresented; // Re-assignment required to update array
-  toHolderNounsRepresented.push(transferredNounId);
-  toHolderDelegate.nounsRepresented = toHolderNounsRepresented;
+  let toHolderawinRepresented = toHolderDelegate.awinRepresented; // Re-assignment required to update array
+  toHolderawinRepresented.push(transferredNounId);
+  toHolderDelegate.awinRepresented = toHolderawinRepresented;
   toHolderDelegate.save();
 
   let toHolderPreviousBalance = toHolder.tokenBalanceRaw;
@@ -146,9 +146,9 @@ export function handleTransfer(event: Transfer): void {
   toHolder.tokenBalance = toHolder.tokenBalanceRaw;
   toHolder.totalTokensHeldRaw = toHolder.totalTokensHeldRaw + BIGINT_ONE;
   toHolder.totalTokensHeld = toHolder.totalTokensHeldRaw;
-  let toHolderNouns = toHolder.nouns; // Re-assignment required to update array
-  toHolderNouns.push(event.params.tokenId.toString());
-  toHolder.nouns = toHolderNouns;
+  let toHolderawin = toHolder.awin; // Re-assignment required to update array
+  toHolderawin.push(event.params.tokenId.toString());
+  toHolder.awin = toHolderawin;
 
   if (toHolder.tokenBalanceRaw == BIGINT_ZERO && toHolderPreviousBalance > BIGINT_ZERO) {
     governance.currentTokenHolders = governance.currentTokenHolders - BIGINT_ONE;

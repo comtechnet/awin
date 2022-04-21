@@ -1,7 +1,7 @@
-import { ImageData as data, getNounData } from '@nouns/assets';
-import { buildSVG } from '@nouns/sdk';
+import { ImageData as data, getNounData } from '@awin/assets';
+import { buildSVG } from '@awin/sdk';
 import { BigNumber as EthersBN } from 'ethers';
-import { INounSeed, useNounSeed } from '../../wrappers/nounToken';
+import { Iawineed, useawineed } from '../../wrappers/nounToken';
 import Noun from '../Noun';
 import { Link } from 'react-router-dom';
 import classes from './StandaloneNoun.module.css';
@@ -12,14 +12,14 @@ interface StandaloneNounProps {
 
 interface StandaloneNounWithSeedProps {
   nounId: EthersBN;
-  onLoadSeed?: (seed: INounSeed) => void;
+  onLoadSeed?: (seed: Iawineed) => void;
   shouldLinkToProfile: boolean;
 }
 
-const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
+const getNoun = (nounId: string | EthersBN, seed: Iawineed) => {
   const id = nounId.toString();
   const name = `Noun ${id}`;
-  const description = `Noun ${id} is a member of the Nouns DAO`;
+  const description = `Noun ${id} is a member of the awin DAO`;
   const { parts, background } = getNounData(seed);
   const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
 
@@ -32,7 +32,7 @@ const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
-  const seed = useNounSeed(nounId);
+  const seed = useawineed(nounId);
   const noun = seed && getNoun(nounId, seed);
 
   return (
@@ -47,7 +47,7 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
 ) => {
   const { nounId, onLoadSeed, shouldLinkToProfile } = props;
 
-  const seed = useNounSeed(nounId);
+  const seed = useawineed(nounId);
 
   if (!seed || !nounId || !onLoadSeed) return <Noun imgPath="" alt="Noun" />;
 

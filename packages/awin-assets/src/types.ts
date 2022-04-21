@@ -1,4 +1,4 @@
-export interface NounSeed {
+export interface awineed {
   background: number;
   body: number;
   accessory: number;

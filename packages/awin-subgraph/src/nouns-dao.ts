@@ -6,7 +6,7 @@ import {
   ProposalExecuted,
   VoteCast,
   ProposalVetoed,
-} from './types/NounsDAO/NounsDAO';
+} from './types/awinDAO/awinDAO';
 import {
   getOrCreateDelegate,
   getOrCreateProposal,
@@ -121,7 +121,7 @@ export function handleVoteCast(event: VoteCast): void {
   vote.votes = event.params.votes;
   vote.support = event.params.support == 1;
   vote.supportDetailed = event.params.support;
-  vote.nouns = voter.nounsRepresented;
+  vote.awin = voter.awinRepresented;
 
   vote.save();
 

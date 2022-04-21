@@ -6,9 +6,9 @@ import { Signer } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { NounsToken } from "./NounsToken";
+import type { awinToken } from "./awinToken";
 
-export class NounsTokenFactory extends ContractFactory {
+export class awinTokenFactory extends ContractFactory {
   constructor(signer?: Signer) {
     super(_abi, _bytecode, signer);
   }
@@ -20,7 +20,7 @@ export class NounsTokenFactory extends ContractFactory {
     _seeder: string,
     _proxyRegistry: string,
     overrides?: Overrides
-  ): Promise<NounsToken> {
+  ): Promise<awinToken> {
     return super.deploy(
       _noundersDAO,
       _minter,
@@ -28,7 +28,7 @@ export class NounsTokenFactory extends ContractFactory {
       _seeder,
       _proxyRegistry,
       overrides || {}
-    ) as Promise<NounsToken>;
+    ) as Promise<awinToken>;
   }
   getDeployTransaction(
     _noundersDAO: string,
@@ -47,17 +47,17 @@ export class NounsTokenFactory extends ContractFactory {
       overrides || {}
     );
   }
-  attach(address: string): NounsToken {
-    return super.attach(address) as NounsToken;
+  attach(address: string): awinToken {
+    return super.attach(address) as awinToken;
   }
-  connect(signer: Signer): NounsTokenFactory {
-    return super.connect(signer) as NounsTokenFactory;
+  connect(signer: Signer): awinTokenFactory {
+    return super.connect(signer) as awinTokenFactory;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): NounsToken {
-    return new Contract(address, _abi, signerOrProvider) as NounsToken;
+  ): awinToken {
+    return new Contract(address, _abi, signerOrProvider) as awinToken;
   }
 }
 
@@ -75,12 +75,12 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "contract INounsDescriptor",
+        internalType: "contract IawinDescriptor",
         name: "_descriptor",
         type: "address",
       },
       {
-        internalType: "contract INounsSeeder",
+        internalType: "contract IawinSeeder",
         name: "_seeder",
         type: "address",
       },
@@ -204,7 +204,7 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract INounsDescriptor",
+        internalType: "contract IawinDescriptor",
         name: "descriptor",
         type: "address",
       },
@@ -282,7 +282,7 @@ const _abi = [
           },
         ],
         indexed: false,
-        internalType: "struct INounsSeeder.Seed",
+        internalType: "struct IawinSeeder.Seed",
         name: "seed",
         type: "tuple",
       },
@@ -333,7 +333,7 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract INounsSeeder",
+        internalType: "contract IawinSeeder",
         name: "seeder",
         type: "address",
       },
@@ -591,7 +591,7 @@ const _abi = [
     name: "descriptor",
     outputs: [
       {
-        internalType: "contract INounsDescriptor",
+        internalType: "contract IawinDescriptor",
         name: "",
         type: "address",
       },
@@ -943,7 +943,7 @@ const _abi = [
     name: "seeder",
     outputs: [
       {
-        internalType: "contract INounsSeeder",
+        internalType: "contract IawinSeeder",
         name: "",
         type: "address",
       },
@@ -1024,7 +1024,7 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract INounsDescriptor",
+        internalType: "contract IawinDescriptor",
         name: "_descriptor",
         type: "address",
       },
@@ -1063,7 +1063,7 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract INounsSeeder",
+        internalType: "contract IawinSeeder",
         name: "_seeder",
         type: "address",
       },

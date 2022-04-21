@@ -21,8 +21,8 @@ const NavBar = () => {
 
   const stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);
   const history = useHistory();
-  const treasuryBalance = useEtherBalance(config.addresses.nounsDaoExecutor);
-  const daoEtherscanLink = buildEtherscanAddressLink(config.addresses.nounsDaoExecutor);
+  const treasuryBalance = useEtherBalance(config.addresses.awinDaoExecutor);
+  const daoEtherscanLink = buildEtherscanAddressLink(config.addresses.awinDaoExecutor);
 
   const [showConnectModal, setShowConnectModal] = useState(false);
 
@@ -36,14 +36,14 @@ const NavBar = () => {
   const connectedContent = (
     <>
       <Nav.Item>
-        <Nav.Link className={clsx(classes.nounsNavLink, classes.addressNavLink)} disabled>
+        <Nav.Link className={clsx(classes.awinNavLink, classes.addressNavLink)} disabled>
           <span className={classes.greenStatusCircle} />
           <span>{activeAccount && <ShortAddress address={activeAccount} avatar={true} />}</span>
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link
-          className={clsx(classes.nounsNavLink, classes.disconnectBtn)}
+          className={clsx(classes.awinNavLink, classes.disconnectBtn)}
           onClick={() => {
             setShowConnectModal(false);
             deactivate();
@@ -59,7 +59,7 @@ const NavBar = () => {
   const disconnectedContent = (
     <>
       <Nav.Link
-        className={clsx(classes.nounsNavLink, classes.connectBtn)}
+        className={clsx(classes.awinNavLink, classes.connectBtn)}
         onClick={showModalHandler}
       >
         CONNECT WALLET
@@ -85,7 +85,7 @@ const NavBar = () => {
               width="85"
               height="85"
               className="d-inline-block align-middle"
-              alt="Nouns DAO logo"
+              alt="awin DAO logo"
             />
           </Navbar.Brand>
           {Number(CHAIN_ID) !== 1 && (
@@ -100,7 +100,7 @@ const NavBar = () => {
               {treasuryBalance && (
                 <Nav.Link
                   href={daoEtherscanLink}
-                  className={classes.nounsNavLink}
+                  className={classes.awinNavLink}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -108,18 +108,18 @@ const NavBar = () => {
                 </Nav.Link>
               )}
             </Nav.Item>
-            <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink}>
+            <Nav.Link as={Link} to="/vote" className={classes.awinNavLink}>
               DAO
             </Nav.Link>
             <Nav.Link
               href={externalURL(ExternalURL.notion)}
-              className={classes.nounsNavLink}
+              className={classes.awinNavLink}
               target="_blank"
               rel="noreferrer"
             >
               DOCS
             </Nav.Link>
-            <Nav.Link as={Link} to="/playground" className={classes.nounsNavLink}>
+            <Nav.Link as={Link} to="/playground" className={classes.awinNavLink}>
               PLAYGROUND
             </Nav.Link>
             {activeAccount ? connectedContent : disconnectedContent}

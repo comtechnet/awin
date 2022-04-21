@@ -1,9 +1,9 @@
-import { Proposal } from '../../wrappers/nounsDao';
+import { Proposal } from '../../wrappers/awinDao';
 import { Image } from 'react-bootstrap';
 import _YesVoteIcon from '../../assets/icons/YesVote.svg';
 import _NoVoteIcon from '../../assets/icons/NoVote.svg';
 import _AbsentVoteIcon from '../../assets/icons/AbsentVote.svg';
-import { ProposalState } from '../../wrappers/nounsDao';
+import { ProposalState } from '../../wrappers/awinDao';
 
 import classes from './NounProfileVoteRow.module.css';
 
@@ -17,14 +17,14 @@ import _PendingVoteIcon from '../../assets/icons/PendingVote.svg';
 interface NounProfileVoteRowProps {
   proposal: Proposal;
   nounVoted: boolean;
-  nounSupported: boolean;
+  awinupported: boolean;
   nounId: number;
   latestProposalId: number;
 }
 
 const selectIconForNounVoteActivityRow = (
   nounVoted: boolean,
-  nounSupported: boolean,
+  awinupported: boolean,
   proposal: Proposal,
 ) => {
   if (!nounVoted) {
@@ -32,20 +32,20 @@ const selectIconForNounVoteActivityRow = (
       return <Image src={_PendingVoteIcon} className={classes.voteIcon} />;
     }
     return <Image src={_AbsentVoteIcon} className={classes.voteIcon} />;
-  } else if (nounSupported) {
+  } else if (awinupported) {
     return <Image src={_YesVoteIcon} className={classes.voteIcon} />;
   } else {
     return <Image src={_NoVoteIcon} className={classes.voteIcon} />;
   }
 };
 
-const selectVotingInfoText = (nounVoted: boolean, nounSupported: boolean, proposal: Proposal) => {
+const selectVotingInfoText = (nounVoted: boolean, awinupported: boolean, proposal: Proposal) => {
   if (!nounVoted) {
     if (proposal.status === ProposalState.PENDING || proposal.status === ProposalState.ACTIVE) {
       return 'Waiting for';
     }
     return 'Absent for';
-  } else if (nounSupported) {
+  } else if (awinupported) {
     return 'Voted for';
   } else {
     return 'Voted aginst';
@@ -67,7 +67,7 @@ const selectProposalStatusIcon = (proposal: Proposal) => {
 };
 
 const NounProfileVoteRow: React.FC<NounProfileVoteRowProps> = props => {
-  const { proposal, nounVoted, nounSupported, nounId, latestProposalId } = props;
+  const { proposal, nounVoted, awinupported, nounId, latestProposalId } = props;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { loading, error, data } = useQuery(highestNounIdMintedAtProposalTime(proposal.startBlock));
@@ -92,11 +92,11 @@ const NounProfileVoteRow: React.FC<NounProfileVoteRowProps> = props => {
   return (
     <tr onClick={proposalOnClickHandler} className={classes.voteInfoRow}>
       <td className={classes.voteIcon}>
-        {selectIconForNounVoteActivityRow(nounVoted, nounSupported, proposal)}
+        {selectIconForNounVoteActivityRow(nounVoted, awinupported, proposal)}
       </td>
       <td>
         <div className={classes.voteInfoContainer}>
-          {selectVotingInfoText(nounVoted, nounSupported, proposal)}
+          {selectVotingInfoText(nounVoted, awinupported, proposal)}
           <span className={classes.proposalTitle}>{proposal.title}</span>
         </div>
       </td>

@@ -1,4 +1,4 @@
-import { Auction } from '../../wrappers/nounsAuction';
+import { Auction } from '../../wrappers/awinAuction';
 import { useState, useEffect } from 'react';
 import BigNumber from 'bignumber.js';
 import { Row, Col } from 'react-bootstrap';
@@ -21,7 +21,7 @@ import config from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 
 const openEtherscanBidHistory = () => {
-  const url = buildEtherscanAddressLink(config.addresses.nounsAuctionHouseProxy);
+  const url = buildEtherscanAddressLink(config.addresses.awinAuctionHouseProxy);
   window.open(url);
 };
 

@@ -1,4 +1,4 @@
-import { default as NounsAuctionHouseABI } from '../abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json';
+import { default as awinAuctionHouseABI } from '../abi/contracts/awinAuctionHouse.sol/awinAuctionHouse.json';
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import promptjs from 'prompt';
@@ -9,15 +9,15 @@ promptjs.delimiter = '';
 
 type ContractName =
   | 'NFTDescriptor'
-  | 'NounsDescriptor'
-  | 'NounsSeeder'
-  | 'NounsToken'
-  | 'NounsAuctionHouse'
-  | 'NounsAuctionHouseProxyAdmin'
-  | 'NounsAuctionHouseProxy'
-  | 'NounsDAOExecutor'
-  | 'NounsDAOLogicV1'
-  | 'NounsDAOProxy';
+  | 'awinDescriptor'
+  | 'awinSeeder'
+  | 'awinToken'
+  | 'awinAuctionHouse'
+  | 'awinAuctionHouseProxyAdmin'
+  | 'awinAuctionHouseProxy'
+  | 'awinDAOExecutor'
+  | 'awinDAOLogicV1'
+  | 'awinDAOProxy';
 
 interface Contract {
   args?: (string | number | (() => string | undefined))[];
@@ -26,7 +26,7 @@ interface Contract {
   waitForConfirmation?: boolean;
 }
 
-task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken')
+task('deploy', 'Deploys NFTDescriptor, awinDescriptor, awinSeeder, and awinToken')
   .addParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
   .addParam('weth', 'The WETH contract address', undefined, types.string)
   .addOptionalParam('auctionTimeBuffer', 'The auction time buffer (seconds)', 5 * 60, types.int)
@@ -59,38 +59,38 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       from: deployer.address,
       nonce: nonce + AUCTION_HOUSE_PROXY_NONCE_OFFSET,
     });
-    const expectedNounsDAOProxyAddress = ethers.utils.getContractAddress({
+    const expectedawinDAOProxyAddress = ethers.utils.getContractAddress({
       from: deployer.address,
       nonce: nonce + GOVERNOR_N_DELEGATOR_NONCE_OFFSET,
     });
     const contracts: Record<ContractName, Contract> = {
       NFTDescriptor: {},
-      NounsDescriptor: {
+      awinDescriptor: {
         libraries: () => ({
           NFTDescriptor: contracts['NFTDescriptor'].address as string,
         }),
       },
-      NounsSeeder: {},
-      NounsToken: {
+      awinSeeder: {},
+      awinToken: {
         args: [
           args.noundersdao,
           expectedAuctionHouseProxyAddress,
-          () => contracts['NounsDescriptor'].address,
-          () => contracts['NounsSeeder'].address,
+          () => contracts['awinDescriptor'].address,
+          () => contracts['awinSeeder'].address,
           proxyRegistryAddress,
         ],
       },
-      NounsAuctionHouse: {
+      awinAuctionHouse: {
         waitForConfirmation: true,
       },
-      NounsAuctionHouseProxyAdmin: {},
-      NounsAuctionHouseProxy: {
+      awinAuctionHouseProxyAdmin: {},
+      awinAuctionHouseProxy: {
         args: [
-          () => contracts['NounsAuctionHouse'].address,
-          () => contracts['NounsAuctionHouseProxyAdmin'].address,
+          () => contracts['awinAuctionHouse'].address,
+          () => contracts['awinAuctionHouseProxyAdmin'].address,
           () =>
-            new Interface(NounsAuctionHouseABI).encodeFunctionData('initialize', [
-              contracts['NounsToken'].address,
+            new Interface(awinAuctionHouseABI).encodeFunctionData('initialize', [
+              contracts['awinToken'].address,
               args.weth,
               args.auctionTimeBuffer,
               args.auctionReservePrice,
@@ -99,19 +99,19 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
             ]),
         ],
       },
-      NounsDAOExecutor: {
-        args: [expectedNounsDAOProxyAddress, args.timelockDelay],
+      awinDAOExecutor: {
+        args: [expectedawinDAOProxyAddress, args.timelockDelay],
       },
-      NounsDAOLogicV1: {
+      awinDAOLogicV1: {
         waitForConfirmation: true,
       },
-      NounsDAOProxy: {
+      awinDAOProxy: {
         args: [
-          () => contracts['NounsDAOExecutor'].address,
-          () => contracts['NounsToken'].address,
+          () => contracts['awinDAOExecutor'].address,
+          () => contracts['awinToken'].address,
           args.noundersdao,
-          () => contracts['NounsDAOExecutor'].address,
-          () => contracts['NounsDAOLogicV1'].address,
+          () => contracts['awinDAOExecutor'].address,
+          () => contracts['awinDAOLogicV1'].address,
           args.votingPeriod,
           args.votingDelay,
           args.proposalThresholdBps,

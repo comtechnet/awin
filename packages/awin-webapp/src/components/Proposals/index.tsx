@@ -1,4 +1,4 @@
-import { Proposal } from '../../wrappers/nounsDao';
+import { Proposal } from '../../wrappers/awinDao';
 import { Alert, Button } from 'react-bootstrap';
 import ProposalStatus from '../ProposalStatus';
 import classes from './Proposals.module.css';

@@ -6,30 +6,30 @@ import { Signer } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
 import { Contract, ContractFactory, Overrides } from "@ethersproject/contracts";
 
-import type { NounsAuctionHouse } from "./NounsAuctionHouse";
+import type { awinAuctionHouse } from "./awinAuctionHouse";
 
-export class NounsAuctionHouseFactory extends ContractFactory {
+export class awinAuctionHouseFactory extends ContractFactory {
   constructor(signer?: Signer) {
     super(_abi, _bytecode, signer);
   }
 
-  deploy(overrides?: Overrides): Promise<NounsAuctionHouse> {
-    return super.deploy(overrides || {}) as Promise<NounsAuctionHouse>;
+  deploy(overrides?: Overrides): Promise<awinAuctionHouse> {
+    return super.deploy(overrides || {}) as Promise<awinAuctionHouse>;
   }
   getDeployTransaction(overrides?: Overrides): TransactionRequest {
     return super.getDeployTransaction(overrides || {});
   }
-  attach(address: string): NounsAuctionHouse {
-    return super.attach(address) as NounsAuctionHouse;
+  attach(address: string): awinAuctionHouse {
+    return super.attach(address) as awinAuctionHouse;
   }
-  connect(signer: Signer): NounsAuctionHouseFactory {
-    return super.connect(signer) as NounsAuctionHouseFactory;
+  connect(signer: Signer): awinAuctionHouseFactory {
+    return super.connect(signer) as awinAuctionHouseFactory;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): NounsAuctionHouse {
-    return new Contract(address, _abi, signerOrProvider) as NounsAuctionHouse;
+  ): awinAuctionHouse {
+    return new Contract(address, _abi, signerOrProvider) as awinAuctionHouse;
   }
 }
 
@@ -285,8 +285,8 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract INounsToken",
-        name: "_nouns",
+        internalType: "contract IawinToken",
+        name: "_awin",
         type: "address",
       },
       {
@@ -335,10 +335,10 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "nouns",
+    name: "awin",
     outputs: [
       {
-        internalType: "contract INounsToken",
+        internalType: "contract IawinToken",
         name: "",
         type: "address",
       },

@@ -24,9 +24,9 @@ export interface NormalizedNoun {
   seed: Seed;
 }
 
-const nounsGql = `
+const awinGql = `
 {
-  nouns {
+  awin {
     id
     owner {
       id
@@ -72,23 +72,23 @@ export const normalizeNoun = (noun: any): NormalizedNoun => ({
   seed: normalizeSeed(noun.seed),
 });
 
-export const normalizeNouns = R.map(normalizeNoun);
+export const normalizeawin = R.map(normalizeNoun);
 
 export const normalizeVotes = R.map(normalizeVote);
 
 export const ownerFilterFactory = (address: string) =>
   R.filter((noun: any) => bigNumbersEqual(address, noun.owner));
 
-export const isNounOwner = (address: string, nouns: NormalizedNoun[]) =>
-  ownerFilterFactory(address)(nouns).length > 0;
+export const isNounOwner = (address: string, awin: NormalizedNoun[]) =>
+  ownerFilterFactory(address)(awin).length > 0;
 
 export const delegateFilterFactory = (address: string) =>
   R.filter((noun: any) => noun.delegatedTo && bigNumbersEqual(address, noun.delegatedTo));
 
-export const isNounDelegate = (address: string, nouns: NormalizedNoun[]) =>
-  delegateFilterFactory(address)(nouns).length > 0;
+export const isNounDelegate = (address: string, awin: NormalizedNoun[]) =>
+  delegateFilterFactory(address)(awin).length > 0;
 
-export const nounsQuery = async () =>
-  normalizeNouns(
-    (await axios.post(config.app.subgraphApiUri, { query: nounsGql })).data.data.nouns,
+export const awinQuery = async () =>
+  normalizeawin(
+    (await axios.post(config.app.subgraphApiUri, { query: awinGql })).data.data.awin,
   );

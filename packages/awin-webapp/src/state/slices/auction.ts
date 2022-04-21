@@ -6,7 +6,7 @@ import {
   AuctionSettledEvent,
   BidEvent,
 } from '../../utils/types';
-import { Auction as IAuction } from '../../wrappers/nounsAuction';
+import { Auction as IAuction } from '../../wrappers/awinAuction';
 
 export interface AuctionState {
   activeAuction?: IAuction;
